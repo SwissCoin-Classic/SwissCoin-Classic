@@ -1,9 +1,9 @@
-NavCoin Core 4.2.0
+SwissCoin Classic 4.2.0
 =====================
 
 Setup
 ---------------------
-[NavCoin Core](http://navcoin.org/en/download) is the original NavCoin client and it builds the backbone of the network. However, it downloads and stores the entire history of NavCoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+[SwissCoin Classic](http://navcoin.org/en/download) is the original NavCoin client and it builds the backbone of the network. However, it downloads and stores the entire history of NavCoin transactions (which is currently several GBs); depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
 Running
 ---------------------

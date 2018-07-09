@@ -1,7 +1,7 @@
 Translation Strings Policy
 ===========================
 
-This document provides guidelines for internationalization of the NavCoin Core software.
+This document provides guidelines for internationalization of the SwissCoin Classic software.
 
 How to translate?
 ------------------

@@ -1,3 +1,4 @@
 The following files should be taken care of:
 
 doc/swisscoinclassic_logo_doxygen.png
+doc/gitian-building.md

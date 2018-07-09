@@ -1,6 +1,6 @@
 UNIX BUILD NOTES
 ====================
-Some notes on how to build NavCoin Core in Unix.
+Some notes on how to build SwissCoin Classic in Unix.
 
 (for OpenBSD specific instructions, see [build-openbsd.md](build-openbsd.md))
 
@@ -56,7 +56,7 @@ Memory Requirements
 --------------------
 
 C++ compilers are memory-hungry. It is recommended to have at least 1.5 GB of
-memory available when compiling NavCoin Core. On systems with less, gcc can be
+memory available when compiling SwissCoin Classic. On systems with less, gcc can be
 tuned to conserve memory with additional CXXFLAGS:
 
 
@@ -92,7 +92,7 @@ BerkeleyDB 5.1 or later, which break binary wallet compatibility with the distri
 are based on BerkeleyDB 4.8. If you do not care about wallet compatibility,
 pass `--with-incompatible-bdb` to configure.
 
-See the section "Disable-wallet mode" to build NavCoin Core without wallet.
+See the section "Disable-wallet mode" to build SwissCoin Classic without wallet.
 
 Optional:
 
@@ -184,7 +184,7 @@ cd db-4.8.30.NC/build_unix/
 ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$BDB_PREFIX
 make install
 
-# Configure NavCoin Core to use our own-built instance of BDB
+# Configure SwissCoin Classic to use our own-built instance of BDB
 cd $NAVCOIN_ROOT
 ./autogen.sh
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" # (other args...)
@@ -284,7 +284,7 @@ Note:
 Enabling wallet support requires either compiling against a Berkeley DB newer than 4.8 (package `db`) using `--with-incompatible-bdb`,
 or building and depending on a local version of Berkeley DB 4.8. The readily available Arch Linux packages are currently built using
 `--with-incompatible-bdb` according to the [PKGBUILD](https://projects.archlinux.org/svntogit/community.git/tree/navcoin/trunk/PKGBUILD).
-As mentioned above, when maintaining portability of the wallet between the standard NavCoin Core distributions and independently built
+As mentioned above, when maintaining portability of the wallet between the standard SwissCoin Classic distributions and independently built
 node software is desired, Berkeley DB 4.8 must be used.
 
 

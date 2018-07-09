@@ -93,13 +93,13 @@ for normal IPv4/IPv6 communication, use:
 
 Starting with Tor version 0.2.7.1 it is possible, through Tor's control socket
 API, to create and destroy 'ephemeral' hidden services programmatically.
-NavCoin Core has been updated to make use of this.
+SwissCoin Classic has been updated to make use of this.
 
 This means that if Tor is running (and proper authentication has been configured),
-NavCoin Core automatically creates a hidden service to listen on. This will positively 
+SwissCoin Classic automatically creates a hidden service to listen on. This will positively 
 affect the number of available .onion nodes.
 
-This new feature is enabled by default if NavCoin Core is listening, and
+This new feature is enabled by default if SwissCoin Classic is listening, and
 a connection to Tor can be made. It can be configured with the `-listenonion`,
 `-torcontrol` and `-torpassword` settings. To show verbose debugging
 information, pass `-debug=tor`.

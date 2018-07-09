@@ -1,7 +1,7 @@
 Release Process
 ====================
 
-Before any code can be accepted into NavCoin Core a Release Candidate branch and PR must be presented to the community for a minimum stand-down period - as detailed below.
+Before any code can be accepted into SwissCoin Classic a Release Candidate branch and PR must be presented to the community for a minimum stand-down period - as detailed below.
 
 ### Release Candidates
 
@@ -137,7 +137,7 @@ NOTE: Offline builds must use the --url flag to ensure Gitian fetches only from 
 
 The gbuild invocations below <b>DO NOT DO THIS</b> by default.
 
-### Build and sign NavCoin Core for Linux, Windows, and OS X:
+### Build and sign SwissCoin Classic for Linux, Windows, and OS X:
 
     pushd ./gitian-builder
     ./bin/gbuild --memory 3000 --commit navcoin-core=${VERSION} ../navcoin-core/contrib/gitian-descriptors/gitian-arm.yml

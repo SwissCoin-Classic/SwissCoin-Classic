@@ -20,7 +20,7 @@ Dependencies
 
 NOTE: Building with Qt4 is still supported, however, could result in a broken UI. Building with Qt5 is recommended.
 
-Build NavCoin Core
+Build SwissCoin Classic
 ------------------------
 
 1. Clone the navcoin source code and cd into `navcoin`
@@ -49,7 +49,7 @@ Build NavCoin Core
 Running
 -------
 
-NavCoin Core is now available at `./src/navcoind`
+SwissCoin Classic is now available at `./src/navcoind`
 
 Before running, it's recommended you create an RPC configuration file.
 
