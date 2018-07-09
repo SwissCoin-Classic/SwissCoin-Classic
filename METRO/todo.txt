@@ -1,0 +1,36 @@
+1. Rename all instances of
+
+nav-coin
+navcoin
+NAVCoin
+Navtech
+navcoin-dev
+navcoin
+NavCoin
+navcommunity
+nav
+NAV
+
+2. Change them to:
+
+swisscoin-classic
+swisscoinclassic
+SwissCoinClassic
+swisscoinclassic-dev
+SIC
+
+3. DEFIED CHANGES
+NavCoin Core => SwissCoin Classic
+
+Step A: Rename all navcoin to swisscoinclassic
+```
+# in the doc folder:
+
+$ grep -lr navcoin | xargs sed -i 's/navcoin/swisscoinclasic/g'
+$ grep -lr NavCoin | xargs sed -i 's/NavCoin/SwissCoinClassic/g'
+```
+Step B: Rename all navcoin files to swisscoinclassic
+
+```
+rename 's/navcoin/swisscoinclassic/' *
+```
