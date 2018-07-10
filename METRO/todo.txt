@@ -21,6 +21,8 @@ SIC
 
 3. DEFINED CHANGES
 NavCoin Core => SwissCoin Classic
+NAVCOIN => SWISSCOINCLASSIC
+Nav Coin => SwissCoin Classic
 
 4. Problems
 how do we ensure that navcoin-core does not get turned into navcoinclassic-core, which would be problematic because of the long name
