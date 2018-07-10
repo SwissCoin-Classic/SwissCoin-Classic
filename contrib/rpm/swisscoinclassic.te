@@ -1,0 +1,81 @@
+policy_module(swisscoinclassic, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type swisscoinclassic_t;
+type swisscoinclassic_exec_t;
+init_daemon_domain(swisscoinclassic_t, swisscoinclassic_exec_t)
+
+permissive swisscoinclassic_t;
+
+type swisscoinclassic_initrc_exec_t;
+init_script_file(swisscoinclassic_initrc_exec_t)
+
+type swisscoinclassic_conf_t;
+files_type(swisscoinclassic_conf_t)
+
+type swisscoinclassic_var_lib_t;
+files_type(swisscoinclassic_var_lib_t)
+
+type swisscoinclassic_var_run_t;
+files_type(swisscoinclassic_var_run_t)
+
+type swisscoinclassic_port_t;
+corenet_port(swisscoinclassic_port_t)
+
+########################################
+#
+# swisscoinclassic local policy
+#
+allow swisscoinclassic_t self:process { fork };
+
+allow swisscoinclassic_t self:fifo_file rw_fifo_file_perms;
+allow swisscoinclassic_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(swisscoinclassic_t, swisscoinclassic_conf_t, swisscoinclassic_conf_t)
+manage_files_pattern(swisscoinclassic_t, swisscoinclassic_conf_t, swisscoinclassic_conf_t)
+
+manage_dirs_pattern(swisscoinclassic_t, swisscoinclassic_var_lib_t, swisscoinclassic_var_lib_t)
+manage_files_pattern(swisscoinclassic_t, swisscoinclassic_var_lib_t, swisscoinclassic_var_lib_t)
+files_var_lib_filetrans(swisscoinclassic_t, swisscoinclassic_var_lib_t, { dir file })
+
+manage_dirs_pattern(swisscoinclassic_t, swisscoinclassic_var_run_t, swisscoinclassic_var_run_t)
+manage_files_pattern(swisscoinclassic_t, swisscoinclassic_var_run_t, swisscoinclassic_var_run_t)
+
+sysnet_dns_name_resolve(swisscoinclassic_t)
+corenet_all_recvfrom_unlabeled(swisscoinclassic_t)
+
+allow swisscoinclassic_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(swisscoinclassic_t)
+corenet_tcp_sendrecv_generic_node(swisscoinclassic_t)
+corenet_tcp_sendrecv_all_ports(swisscoinclassic_t)
+corenet_tcp_bind_generic_node(swisscoinclassic_t)
+
+gen_require(`
+    type swisscoinclassic_port_t;
+')
+allow swisscoinclassic_t swisscoinclassic_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type swisscoinclassic_port_t;
+')
+allow swisscoinclassic_t swisscoinclassic_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(swisscoinclassic_t)
+
+files_read_etc_files(swisscoinclassic_t)
+
+miscfiles_read_localization(swisscoinclassic_t)
+
+sysnet_dns_name_resolve(swisscoinclassic_t)
+
+allow swisscoinclassic_t swisscoinclassic_exec_t:file execute_no_trans;
+allow swisscoinclassic_t self:process setsched;
+corecmd_exec_ls(swisscoinclassic_t)
+corenet_tcp_connect_http_port(swisscoinclassic_t)
+dev_read_urand(swisscoinclassic_t)
+fs_getattr_xattr_fs(swisscoinclassic_t)
+kernel_read_system_state(swisscoinclassic_t)

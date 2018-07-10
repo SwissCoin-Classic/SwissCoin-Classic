@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_SCHEDULER_H
-#define NAVCOIN_SCHEDULER_H
+#ifndef SWISSCOINCLASSIC_SCHEDULER_H
+#define SWISSCOINCLASSIC_SCHEDULER_H
 
 //
 // NOTE:

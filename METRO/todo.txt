@@ -6,7 +6,7 @@ NAVCoin
 Navtech
 navcoin-dev
 navcoin
-NavCoin
+SwissCoinClassic
 navcommunity
 nav
 NAV
@@ -20,8 +20,8 @@ swisscoinclassic-dev
 SIC
 
 3. DEFINED CHANGES
-NavCoin Core => SwissCoin Classic
-NAVCOIN => SWISSCOINCLASSIC
+SwissCoin Classic => SwissCoin Classic
+SWISSCOINCLASSIC => SWISSCOINCLASSIC
 Nav Coin => SwissCoin Classic
 
 4. Problems
@@ -33,8 +33,8 @@ Step A: Rename all navcoin to swisscoinclassic
 # RUN IN ORDER!
 
 grep -lr navcoin | xargs sed -i 's/navcoin/swisscoinclasic/g'
-grep -lr NavCoin | xargs sed -i 's/NavCoin Core/SwissCoin Classic/g'
-grep -lr NavCoin | xargs sed -i 's/NavCoin/SwissCoin/g'
+grep -lr SwissCoin Classic | xargs sed -i 's/SwissCoin Classic/SwissCoin Classic/g'
+grep -lr SwissCoin Classic | xargs sed -i 's/SwissCoinClassic/SwissCoin/g'
 
 ```
 Step B: Rename all navcoin files to swisscoinclassic

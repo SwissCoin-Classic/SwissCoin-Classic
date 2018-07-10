@@ -14,29 +14,29 @@ else
 LIBUNIVALUE = $(UNIVALUE_LIBS)
 endif
 
-NAVCOIN_CONFIG_INCLUDES=-I$(builddir)/config
-NAVCOIN_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
+SWISSCOINCLASSIC_CONFIG_INCLUDES=-I$(builddir)/config
+SWISSCOINCLASSIC_INCLUDES=-I$(builddir) -I$(builddir)/obj $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFLAGS) $(CRYPTO_CFLAGS) $(SSL_CFLAGS)
 
-NAVCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
-NAVCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
+SWISSCOINCLASSIC_INCLUDES += -I$(srcdir)/secp256k1/include
+SWISSCOINCLASSIC_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBNAVCOIN_SERVER=libnavcoin_server.a
-LIBNAVCOIN_COMMON=libnavcoin_common.a
-LIBNAVCOIN_CONSENSUS=libnavcoin_consensus.a
-LIBNAVCOIN_CLI=libnavcoin_cli.a
-LIBNAVCOIN_UTIL=libnavcoin_util.a
-LIBNAVCOIN_CRYPTO=crypto/libnavcoin_crypto.a
-LIBNAVCOINQT=qt/libnavcoinqt.a
+LIBSWISSCOINCLASSIC_SERVER=libswisscoinclassic_server.a
+LIBSWISSCOINCLASSIC_COMMON=libswisscoinclassic_common.a
+LIBSWISSCOINCLASSIC_CONSENSUS=libswisscoinclassic_consensus.a
+LIBSWISSCOINCLASSIC_CLI=libswisscoinclassic_cli.a
+LIBSWISSCOINCLASSIC_UTIL=libswisscoinclassic_util.a
+LIBSWISSCOINCLASSIC_CRYPTO=crypto/libswisscoinclassic_crypto.a
+LIBSWISSCOINCLASSICQT=qt/libswisscoinclassicqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBNAVCOIN_ZMQ=libnavcoin_zmq.a
+LIBSWISSCOINCLASSIC_ZMQ=libswisscoinclassic_zmq.a
 endif
-if BUILD_NAVCOIN_LIBS
-LIBNAVCOINCONSENSUS=libnavcoinconsensus.la
+if BUILD_SWISSCOINCLASSIC_LIBS
+LIBSWISSCOINCLASSICCONSENSUS=libswisscoinclassicconsensus.la
 endif
 if ENABLE_WALLET
-LIBNAVCOIN_WALLET=libnavcoin_wallet.a
+LIBSWISSCOINCLASSIC_WALLET=libswisscoinclassic_wallet.a
 endif
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
@@ -45,32 +45,32 @@ $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 # Make is not made aware of per-object dependencies to avoid limiting building parallelization
 # But to build the less dependent modules first, we manually select their order here:
 EXTRA_LIBRARIES += \
-  $(LIBNAVCOIN_CRYPTO) \
-  $(LIBNAVCOIN_UTIL) \
-  $(LIBNAVCOIN_COMMON) \
-  $(LIBNAVCOIN_CONSENSUS) \
-  $(LIBNAVCOIN_SERVER) \
-  $(LIBNAVCOIN_CLI) \
-  $(LIBNAVCOIN_WALLET) \
-  $(LIBNAVCOIN_ZMQ)
+  $(LIBSWISSCOINCLASSIC_CRYPTO) \
+  $(LIBSWISSCOINCLASSIC_UTIL) \
+  $(LIBSWISSCOINCLASSIC_COMMON) \
+  $(LIBSWISSCOINCLASSIC_CONSENSUS) \
+  $(LIBSWISSCOINCLASSIC_SERVER) \
+  $(LIBSWISSCOINCLASSIC_CLI) \
+  $(LIBSWISSCOINCLASSIC_WALLET) \
+  $(LIBSWISSCOINCLASSIC_ZMQ)
 
-lib_LTLIBRARIES = $(LIBNAVCOINCONSENSUS)
+lib_LTLIBRARIES = $(LIBSWISSCOINCLASSICCONSENSUS)
 
 bin_PROGRAMS =
 TESTS =
 BENCHMARKS =
 
-if BUILD_NAVCOIND
-  bin_PROGRAMS += navcoind
+if BUILD_SWISSCOINCLASSICD
+  bin_PROGRAMS += swisscoinclassicd
 endif
 
-if BUILD_NAVCOIN_UTILS
-  bin_PROGRAMS += navcoin-cli navcoin-tx
+if BUILD_SWISSCOINCLASSIC_UTILS
+  bin_PROGRAMS += swisscoinclassic-cli swisscoinclassic-tx
 endif
 
 .PHONY: FORCE check-symbols check-security
-# navcoin core #
-NAVCOIN_CORE_H = \
+# swisscoinclassic core #
+SWISSCOINCLASSIC_CORE_H = \
   addressindex.h \
   spentindex.h \
   timestampindex.h \
@@ -166,12 +166,12 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh $(abs_top_builddir)/src/obj/build.h \
 	  $(abs_top_srcdir)
-libnavcoin_util_a-clientversion.$(OBJEXT): obj/build.h
+libswisscoinclassic_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between navcoind and navcoin-qt
-libnavcoin_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libnavcoin_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_server_a_SOURCES = \
+# server: shared between swisscoinclassicd and swisscoinclassic-qt
+libswisscoinclassic_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libswisscoinclassic_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_server_a_SOURCES = \
   addrman.cpp \
   bloom.cpp \
   blockencodings.cpp \
@@ -211,23 +211,23 @@ libnavcoin_server_a_SOURCES = \
   utils/dns_utils.cpp \
   validationinterface.cpp \
   versionbits.cpp \
-  $(NAVCOIN_CORE_H)
+  $(SWISSCOINCLASSIC_CORE_H)
 
 if ENABLE_ZMQ
-libnavcoin_zmq_a_CPPFLAGS = $(NAVCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libnavcoin_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_zmq_a_SOURCES = \
+libswisscoinclassic_zmq_a_CPPFLAGS = $(SWISSCOINCLASSIC_INCLUDES) $(ZMQ_CFLAGS)
+libswisscoinclassic_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp
 endif
 
 
-# wallet: shared between navcoind and navcoin-qt, but only linked
+# wallet: shared between swisscoinclassicd and swisscoinclassic-qt, but only linked
 # when wallet enabled
-libnavcoin_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-libnavcoin_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_wallet_a_SOURCES = \
+libswisscoinclassic_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+libswisscoinclassic_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_wallet_a_SOURCES = \
   consensus/cfund.cpp \
   wallet/crypter.cpp \
   wallet/db.cpp \
@@ -237,12 +237,12 @@ libnavcoin_wallet_a_SOURCES = \
   wallet/wallet.cpp \
   wallet/walletdb.cpp \
   policy/rbf.cpp \
-  $(NAVCOIN_CORE_H)
+  $(SWISSCOINCLASSIC_CORE_H)
 
 # crypto primitives library
-crypto_libnavcoin_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_CONFIG_INCLUDES)
-crypto_libnavcoin_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libnavcoin_crypto_a_SOURCES = \
+crypto_libswisscoinclassic_crypto_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_CONFIG_INCLUDES)
+crypto_libswisscoinclassic_crypto_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libswisscoinclassic_crypto_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/common.h \
@@ -260,9 +260,9 @@ crypto_libnavcoin_crypto_a_SOURCES = \
   crypto/sha512.h
 
 # consensus: shared between all executables that validate any consensus rules.
-libnavcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-libnavcoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_consensus_a_SOURCES = \
+libswisscoinclassic_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+libswisscoinclassic_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -309,7 +309,7 @@ libnavcoin_consensus_a_SOURCES = \
   primitives/transaction.h \
   pubkey.cpp \
   pubkey.h \
-  script/navcoinconsensus.cpp \
+  script/swisscoinclassicconsensus.cpp \
   script/interpreter.cpp \
   script/interpreter.h \
   script/script.cpp \
@@ -324,10 +324,10 @@ libnavcoin_consensus_a_SOURCES = \
   utilstrencodings.h \
   version.h
 
-# common: shared between navcoind, and navcoin-qt and non-server tools
-libnavcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-libnavcoin_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_common_a_SOURCES = \
+# common: shared between swisscoinclassicd, and swisscoinclassic-qt and non-server tools
+libswisscoinclassic_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+libswisscoinclassic_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_common_a_SOURCES = \
   amount.cpp \
   base58.cpp \
   chainparams.cpp \
@@ -342,14 +342,14 @@ libnavcoin_common_a_SOURCES = \
   scheduler.cpp \
   script/sign.cpp \
   script/standard.cpp \
-  $(NAVCOIN_CORE_H)
+  $(SWISSCOINCLASSIC_CORE_H)
 
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libnavcoin_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-libnavcoin_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_util_a_SOURCES = \
+libswisscoinclassic_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+libswisscoinclassic_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_util_a_SOURCES = \
   support/pagelocker.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -364,100 +364,100 @@ libnavcoin_util_a_SOURCES = \
   utilmoneystr.cpp \
   utilstrencodings.cpp \
   utiltime.cpp \
-  $(NAVCOIN_CORE_H)
+  $(SWISSCOINCLASSIC_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libnavcoin_util_a_SOURCES += compat/glibc_compat.cpp
+libswisscoinclassic_util_a_SOURCES += compat/glibc_compat.cpp
 endif
 
-# cli: shared between navcoin-cli and navcoin-qt
-libnavcoin_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-libnavcoin_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libnavcoin_cli_a_SOURCES = \
+# cli: shared between swisscoinclassic-cli and swisscoinclassic-qt
+libswisscoinclassic_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+libswisscoinclassic_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassic_cli_a_SOURCES = \
   rpc/client.cpp \
-  $(NAVCOIN_CORE_H)
+  $(SWISSCOINCLASSIC_CORE_H)
 
-nodist_libnavcoin_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libswisscoinclassic_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# navcoind binary #
-navcoind_SOURCES = navcoind.cpp
-navcoind_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-navcoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-navcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# swisscoinclassicd binary #
+swisscoinclassicd_SOURCES = swisscoinclassicd.cpp
+swisscoinclassicd_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+swisscoinclassicd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+swisscoinclassicd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-navcoind_SOURCES += navcoind-res.rc
+swisscoinclassicd_SOURCES += swisscoinclassicd-res.rc
 endif
 
-navcoind_LDADD = \
-  $(LIBNAVCOIN_SERVER) \
-  $(LIBNAVCOIN_COMMON) \
+swisscoinclassicd_LDADD = \
+  $(LIBSWISSCOINCLASSIC_SERVER) \
+  $(LIBSWISSCOINCLASSIC_COMMON) \
   $(LIBUNIVALUE) \
-  $(LIBNAVCOIN_UTIL) \
-  $(LIBNAVCOIN_WALLET) \
-  $(LIBNAVCOIN_ZMQ) \
-  $(LIBNAVCOIN_CONSENSUS) \
-  $(LIBNAVCOIN_CRYPTO) \
+  $(LIBSWISSCOINCLASSIC_UTIL) \
+  $(LIBSWISSCOINCLASSIC_WALLET) \
+  $(LIBSWISSCOINCLASSIC_ZMQ) \
+  $(LIBSWISSCOINCLASSIC_CONSENSUS) \
+  $(LIBSWISSCOINCLASSIC_CRYPTO) \
   $(LIBLEVELDB) \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-navcoind_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(UNBOUND_LIBS) $(CURL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+swisscoinclassicd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(UNBOUND_LIBS) $(CURL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# navcoin-cli binary #
-navcoin_cli_SOURCES = navcoin-cli.cpp
-navcoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES) $(EVENT_CFLAGS)
-navcoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-navcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# swisscoinclassic-cli binary #
+swisscoinclassic_cli_SOURCES = swisscoinclassic-cli.cpp
+swisscoinclassic_cli_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES) $(EVENT_CFLAGS)
+swisscoinclassic_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+swisscoinclassic_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-navcoin_cli_SOURCES += navcoin-cli-res.rc
+swisscoinclassic_cli_SOURCES += swisscoinclassic-cli-res.rc
 endif
 
-navcoin_cli_LDADD = \
-  $(LIBNAVCOIN_CLI) \
+swisscoinclassic_cli_LDADD = \
+  $(LIBSWISSCOINCLASSIC_CLI) \
   $(LIBUNIVALUE) \
-  $(LIBNAVCOIN_UTIL) \
-  $(LIBNAVCOIN_CRYPTO)
+  $(LIBSWISSCOINCLASSIC_UTIL) \
+  $(LIBSWISSCOINCLASSIC_CRYPTO)
 
-navcoin_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(UNBOUND_LIBS) $(CURL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
+swisscoinclassic_cli_LDADD += $(BOOST_LIBS) $(SSL_LIBS) $(UNBOUND_LIBS) $(CURL_LIBS) $(CRYPTO_LIBS) $(EVENT_LIBS)
 #
 
-# navcoin-tx binary #
-navcoin_tx_SOURCES = navcoin-tx.cpp
-navcoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(NAVCOIN_INCLUDES)
-navcoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-navcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# swisscoinclassic-tx binary #
+swisscoinclassic_tx_SOURCES = swisscoinclassic-tx.cpp
+swisscoinclassic_tx_CPPFLAGS = $(AM_CPPFLAGS) $(SWISSCOINCLASSIC_INCLUDES)
+swisscoinclassic_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+swisscoinclassic_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-navcoin_tx_SOURCES += navcoin-tx-res.rc
+swisscoinclassic_tx_SOURCES += swisscoinclassic-tx-res.rc
 endif
 
-navcoin_tx_LDADD = \
+swisscoinclassic_tx_LDADD = \
   $(LIBUNIVALUE) \
-  $(LIBNAVCOIN_COMMON) \
-  $(LIBNAVCOIN_UTIL) \
-  $(LIBNAVCOIN_CONSENSUS) \
-  $(LIBNAVCOIN_CRYPTO) \
+  $(LIBSWISSCOINCLASSIC_COMMON) \
+  $(LIBSWISSCOINCLASSIC_UTIL) \
+  $(LIBSWISSCOINCLASSIC_CONSENSUS) \
+  $(LIBSWISSCOINCLASSIC_CRYPTO) \
   $(LIBSECP256K1)
 
-navcoin_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
+swisscoinclassic_tx_LDADD += $(BOOST_LIBS) $(CRYPTO_LIBS)
 #
 
-# navcoinconsensus library #
-if BUILD_NAVCOIN_LIBS
-include_HEADERS = script/navcoinconsensus.h
-libnavcoinconsensus_la_SOURCES = $(crypto_libnavcoin_crypto_a_SOURCES) $(libnavcoin_consensus_a_SOURCES)
+# swisscoinclassicconsensus library #
+if BUILD_SWISSCOINCLASSIC_LIBS
+include_HEADERS = script/swisscoinclassicconsensus.h
+libswisscoinclassicconsensus_la_SOURCES = $(crypto_libswisscoinclassic_crypto_a_SOURCES) $(libswisscoinclassic_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libnavcoinconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libswisscoinclassicconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libnavcoinconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libnavcoinconsensus_la_LIBADD = $(LIBSECP256K1)
-libnavcoinconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_NAVCOIN_INTERNAL
-libnavcoinconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libswisscoinclassicconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libswisscoinclassicconsensus_la_LIBADD = $(LIBSECP256K1)
+libswisscoinclassicconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_SWISSCOINCLASSIC_INTERNAL
+libswisscoinclassicconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #

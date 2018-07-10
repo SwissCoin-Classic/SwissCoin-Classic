@@ -4,7 +4,7 @@
 
 #include "qvalidatedlineedit.h"
 
-#include "navcoinaddressvalidator.h"
+#include "swisscoinclassicaddressvalidator.h"
 #include "guiconstants.h"
 
 QValidatedLineEdit::QValidatedLineEdit(QWidget *parent) :

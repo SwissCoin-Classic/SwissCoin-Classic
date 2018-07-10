@@ -4,8 +4,8 @@ Benchmarking
 SwissCoin Classic has an internal benchmarking framework, with benchmarks
 for cryptographic algorithms such as SHA1, SHA256, SHA512 and RIPEMD160. As well as the rolling bloom filter.
 
-After compiling navcoin-core, the benchmarks can be run with:
-`src/bench/bench_navcoin`
+After compiling swisscoinclassic-core, the benchmarks can be run with:
+`src/bench/bench_swisscoinclassic`
 
 The output will look similar to:
 ```

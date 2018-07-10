@@ -3,10 +3,10 @@
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-from test_framework.test_framework import NavCoinTestFramework
+from test_framework.test_framework import SwissCoinClassicTestFramework
 from test_framework.util import *
 
-class WalletTest (NavCoinTestFramework):
+class WalletTest (SwissCoinClassicTestFramework):
 
     def check_fee_amount(self, curr_balance, balance_with_fee, fee_per_byte, tx_size):
         """Return curr_balance after asserting the fee was in range"""
@@ -198,7 +198,7 @@ class WalletTest (NavCoinTestFramework):
 
         #do some -walletbroadcast tests
         stop_nodes(self.nodes)
-        wait_navcoinds()
+        wait_swisscoinclassicds()
         self.nodes = start_nodes(3, self.options.tmpdir, [["-walletbroadcast=0"],["-walletbroadcast=0"],["-walletbroadcast=0"]])
         connect_nodes_bi(self.nodes,0,1)
         connect_nodes_bi(self.nodes,1,2)
@@ -224,7 +224,7 @@ class WalletTest (NavCoinTestFramework):
 
         #restart the nodes with -walletbroadcast=1
         stop_nodes(self.nodes)
-        wait_navcoinds()
+        wait_swisscoinclassicds()
         self.nodes = start_nodes(3, self.options.tmpdir)
         connect_nodes_bi(self.nodes,0,1)
         connect_nodes_bi(self.nodes,1,2)
@@ -328,13 +328,13 @@ class WalletTest (NavCoinTestFramework):
             '-reindex',
             '-zapwallettxes=1',
             '-zapwallettxes=2',
-            # disabled until issue is fixed: https://github.com/navcoin/navcoin/issues/7463
+            # disabled until issue is fixed: https://github.com/swisscoinclassic/swisscoinclassic/issues/7463
             # '-salvagewallet',
         ]
         for m in maintenance:
             print("check " + m)
             stop_nodes(self.nodes)
-            wait_navcoinds()
+            wait_swisscoinclassicds()
             self.nodes = start_nodes(3, self.options.tmpdir, [[m]] * 3)
             while m == '-reindex' and [block_count] * 3 != [self.nodes[i].getblockcount() for i in range(3)]:
                 # reindex will leave rpc warm up "early"; Wait for it to finish

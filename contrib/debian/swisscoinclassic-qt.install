@@ -1,0 +1,6 @@
+usr/local/bin/swisscoinclassic-qt usr/bin
+share/pixmaps/swisscoinclassic32.xpm usr/share/pixmaps
+share/pixmaps/swisscoinclassic16.xpm usr/share/pixmaps
+share/pixmaps/swisscoinclassic128.png usr/share/pixmaps
+debian/swisscoinclassic-qt.desktop usr/share/applications
+debian/swisscoinclassic-qt.protocol usr/share/kde4/services/

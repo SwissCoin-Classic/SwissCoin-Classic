@@ -138,10 +138,10 @@ src/Makefile.bench.include
 src/Makefile.qt.include
 src/Makefile.qttest.include
 src/Makefile.test.include
-src/NavCoin-4.0.files
-src/NavCoin4-Qt.creator.user
-src/NavCoin4-Qt.files
-src/NavCoin4.files
+src/SwissCoinClassic-4.0.files
+src/SwissCoinClassic4-Qt.creator.user
+src/SwissCoinClassic4-Qt.files
+src/SwissCoinClassic4.files
 src/bench/.gitignore
 src/chainparams.cpp
 src/chainparamsbase.h
@@ -174,7 +174,7 @@ src/netbase.cpp
 src/netbase.h
 src/noui.cpp
 src/protocol.h
-src/qt/NavCoin4.files
+src/qt/SwissCoinClassic4.files
 src/qt/addressbookpage.cpp
 src/qt/askpassphrasedialog.cpp
 src/qt/coincontroldialog.cpp

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_WALLET_NAVTECH_H
-#define NAVCOIN_WALLET_NAVTECH_H
+#ifndef SWISSCOINCLASSIC_WALLET_NAVTECH_H
+#define SWISSCOINCLASSIC_WALLET_NAVTECH_H
 
 #include "compat.h"
 
@@ -55,4 +55,4 @@ private:
     bool TestEncryption(std::string encrypted, UniValue serverData);
 };
 
-#endif //NAVCOIN_WALLET_NAVTECH_H
+#endif //SWISSCOINCLASSIC_WALLET_NAVTECH_H

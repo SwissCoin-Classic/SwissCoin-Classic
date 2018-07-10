@@ -4,8 +4,8 @@
 
 #include "guiutil.h"
 
-#include "navcoinaddressvalidator.h"
-#include "navcoinunits.h"
+#include "swisscoinclassicaddressvalidator.h"
+#include "swisscoinclassicunits.h"
 #include "qvalidatedlineedit.h"
 #include "walletmodel.h"
 
@@ -117,7 +117,7 @@ static std::string DummyAddress(const CChainParams &params)
     sourcedata.insert(sourcedata.end(), dummydata, dummydata + sizeof(dummydata));
     for(int i=0; i<256; ++i) { // Try every trailing byte
         std::string s = EncodeBase58(begin_ptr(sourcedata), end_ptr(sourcedata));
-        if (!CNavCoinAddress(s).IsValid())
+        if (!CSwissCoinClassicAddress(s).IsValid())
             return s;
         sourcedata[sourcedata.size()-1] += 1;
     }
@@ -132,11 +132,11 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 #if QT_VERSION >= 0x040700
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a NavCoin address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a SwissCoin Classic address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
 #endif
-    widget->setValidator(new NavCoinAddressEntryValidator(parent));
-    widget->setCheckValidator(new NavCoinAddressCheckValidator(parent));
+    widget->setValidator(new SwissCoinClassicAddressEntryValidator(parent));
+    widget->setCheckValidator(new SwissCoinClassicAddressCheckValidator(parent));
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -148,10 +148,10 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseNavCoinURI(const QUrl &uri, SendCoinsRecipient *out)
+bool parseSwissCoinClassicURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no navcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("navcoin"))
+    // return if URI is not valid or is no swisscoinclassic: URI
+    if(!uri.isValid() || uri.scheme() != QString("swisscoinclassic"))
         return false;
 
     SendCoinsRecipient rv;
@@ -191,7 +191,7 @@ bool parseNavCoinURI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!NavCoinUnits::parse(NavCoinUnits::NAV, i->second, &rv.amount))
+                if(!SwissCoinClassicUnits::parse(SwissCoinClassicUnits::SICC, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -209,28 +209,28 @@ bool parseNavCoinURI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseNavCoinURI(QString uri, SendCoinsRecipient *out)
+bool parseSwissCoinClassicURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert navcoin:// to navcoin:
+    // Convert swisscoinclassic:// to swisscoinclassic:
     //
-    //    Cannot handle this later, because navcoin:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because swisscoinclassic:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("navcoin://", Qt::CaseInsensitive))
+    if(uri.startsWith("swisscoinclassic://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "navcoin:");
+        uri.replace(0, 10, "swisscoinclassic:");
     }
     QUrl uriInstance(uri);
-    return parseNavCoinURI(uriInstance, out);
+    return parseSwissCoinClassicURI(uriInstance, out);
 }
 
-QString formatNavCoinURI(const SendCoinsRecipient &info)
+QString formatSwissCoinClassicURI(const SendCoinsRecipient &info)
 {
-    QString ret = QString("navcoin:%1").arg(info.address);
+    QString ret = QString("swisscoinclassic:%1").arg(info.address);
     int paramCount = 0;
 
     if (info.amount)
     {
-        ret += QString("?amount=%1").arg(NavCoinUnits::format(NavCoinUnits::NAV, info.amount, false, NavCoinUnits::separatorNever));
+        ret += QString("?amount=%1").arg(SwissCoinClassicUnits::format(SwissCoinClassicUnits::SICC, info.amount, false, SwissCoinClassicUnits::separatorNever));
         paramCount++;
     }
 
@@ -253,7 +253,7 @@ QString formatNavCoinURI(const SendCoinsRecipient &info)
 
 bool isDust(const QString& address, const CAmount& amount)
 {
-    CTxDestination dest = CNavCoinAddress(address.toStdString()).Get();
+    CTxDestination dest = CSwissCoinClassicAddress(address.toStdString()).Get();
     CScript script = GetScriptForDestination(dest);
     CTxOut txOut(amount, script);
     return txOut.IsDust(::minRelayTxFee);
@@ -426,11 +426,11 @@ void openDebugLogfile()
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathDebug)));
 }
 
-void openNavCoinConf()
+void openSwissCoinClassicConf()
 {
      boost::filesystem::path pathConfig = GetConfigFile();
 
-     /* Open navcoin.conf with the associated application */
+     /* Open swisscoinclassic.conf with the associated application */
      if (boost::filesystem::exists(pathConfig))
          QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
@@ -619,15 +619,15 @@ boost::filesystem::path static StartupShortcutPath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "NavCoin.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "SwissCoinClassic.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "NavCoin (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("NavCoin (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "SwissCoin Classic (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("SwissCoin Classic (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for NavCoin*.lnk
+    // check for SwissCoinClassic*.lnk
     return boost::filesystem::exists(StartupShortcutPath());
 }
 
@@ -719,8 +719,8 @@ boost::filesystem::path static GetAutostartFilePath()
 {
     std::string chain = ChainNameFromCommandLine();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "navcoin.desktop";
-    return GetAutostartDir() / strprintf("navcoin-%s.lnk", chain);
+        return GetAutostartDir() / "swisscoinclassic.desktop";
+    return GetAutostartDir() / strprintf("swisscoinclassic-%s.lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -759,13 +759,13 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         if (!optionFile.good())
             return false;
         std::string chain = ChainNameFromCommandLine();
-        // Write a navcoin.desktop file to the autostart directory:
+        // Write a swisscoinclassic.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=NavCoin\n";
+            optionFile << "Name=SwissCoinClassic\n";
         else
-            optionFile << strprintf("Name=NavCoin (%s)\n", chain);
+            optionFile << strprintf("Name=SwissCoin Classic (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -testnet=%d -regtest=%d -devnet=%d\n", GetBoolArg("-testnet", false), GetBoolArg("-regtest", false), GetBoolArg("-devnet", false));
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -784,7 +784,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
-    // loop through the list of startup items and try to find the navcoin app
+    // loop through the list of startup items and try to find the swisscoinclassic app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
@@ -816,21 +816,21 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
 
 bool GetStartOnSystemStartup()
 {
-    CFURLRef navcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    CFURLRef swisscoinclassicAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, navcoinAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, swisscoinclassicAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
-    CFURLRef navcoinAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    CFURLRef swisscoinclassicAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, navcoinAppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, swisscoinclassicAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add navcoin app to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, navcoinAppUrl, NULL, NULL);
+        // add swisscoinclassic app to startup item list
+        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, swisscoinclassicAppUrl, NULL, NULL);
     }
     else if(!fAutoStart && foundItem) {
         // remove item

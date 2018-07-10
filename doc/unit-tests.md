@@ -6,13 +6,13 @@ and tests weren't explicitly disabled.
 
 After configuring, they can be run with `make check`.
 
-To run the navcoind tests manually, launch `src/test/test_navcoin`.
+To run the swisscoinclassicd tests manually, launch `src/test/test_swisscoinclassic`.
 
-To add more navcoind tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
+To add more swisscoinclassicd tests, add `BOOST_AUTO_TEST_CASE` functions to the existing
 .cpp files in the `test/` directory or add new .cpp files that
 implement new BOOST_AUTO_TEST_SUITE sections.
 
-To run the navcoin-qt tests manually, launch `src/qt/test/test_navcoin-qt`
+To run the swisscoinclassic-qt tests manually, launch `src/qt/test/test_swisscoinclassic-qt`
 
-To add more navcoin-qt tests, add them to the `src/qt/test/` directory and
+To add more swisscoinclassic-qt tests, add them to the `src/qt/test/` directory and
 the `src/qt/test/test_main.cpp` file.

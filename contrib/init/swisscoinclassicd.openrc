@@ -1,0 +1,92 @@
+#!/sbin/runscript
+
+# backward compatibility for existing gentoo layout 
+#
+if [ -d "/var/lib/swisscoinclassic/.swisscoinclassic" ]; then
+	SWISSCOINCLASSICD_DEFAULT_DATADIR="/var/lib/swisscoinclassic/.swisscoinclassic"
+else
+	SWISSCOINCLASSICD_DEFAULT_DATADIR="/var/lib/swisscoinclassicd"
+fi
+
+SWISSCOINCLASSICD_CONFIGFILE=${SWISSCOINCLASSICD_CONFIGFILE:-/etc/swisscoinclassic/swisscoinclassic.conf}
+SWISSCOINCLASSICD_PIDDIR=${SWISSCOINCLASSICD_PIDDIR:-/var/run/swisscoinclassicd}
+SWISSCOINCLASSICD_PIDFILE=${SWISSCOINCLASSICD_PIDFILE:-${SWISSCOINCLASSICD_PIDDIR}/swisscoinclassicd.pid}
+SWISSCOINCLASSICD_DATADIR=${SWISSCOINCLASSICD_DATADIR:-${SWISSCOINCLASSICD_DEFAULT_DATADIR}}
+SWISSCOINCLASSICD_USER=${SWISSCOINCLASSICD_USER:-${SWISSCOINCLASSIC_USER:-swisscoinclassic}}
+SWISSCOINCLASSICD_GROUP=${SWISSCOINCLASSICD_GROUP:-swisscoinclassic}
+SWISSCOINCLASSICD_BIN=${SWISSCOINCLASSICD_BIN:-/usr/bin/swisscoinclassicd}
+SWISSCOINCLASSICD_NICE=${SWISSCOINCLASSICD_NICE:-${NICELEVEL:-0}}
+SWISSCOINCLASSICD_OPTS="${SWISSCOINCLASSICD_OPTS:-${SWISSCOINCLASSIC_OPTS}}"
+
+name="SwissCoin Classic Daemon"
+description="SwissCoin Classic cryptocurrency P2P network daemon"
+
+command="/usr/bin/swisscoinclassicd"
+command_args="-pid=\"${SWISSCOINCLASSICD_PIDFILE}\" \
+		-conf=\"${SWISSCOINCLASSICD_CONFIGFILE}\" \
+		-datadir=\"${SWISSCOINCLASSICD_DATADIR}\" \
+		-daemon \
+		${SWISSCOINCLASSICD_OPTS}"
+
+required_files="${SWISSCOINCLASSICD_CONFIGFILE}"
+start_stop_daemon_args="-u ${SWISSCOINCLASSICD_USER} \
+			-N ${SWISSCOINCLASSICD_NICE} -w 2000"
+pidfile="${SWISSCOINCLASSICD_PIDFILE}"
+
+# The retry schedule to use when stopping the daemon. Could be either
+# a timeout in seconds or multiple signal/timeout pairs (like
+# "SIGKILL/180 SIGTERM/300")
+retry="${SWISSCOINCLASSICD_SIGTERM_TIMEOUT}"
+
+depend() {
+	need localmount net
+}
+
+# verify
+# 1) that the datadir exists and is writable (or create it)
+# 2) that a directory for the pid exists and is writable
+# 3) ownership and permissions on the config file
+start_pre() {
+	checkpath \
+	-d \
+	--mode 0750 \
+	--owner "${SWISSCOINCLASSICD_USER}:${SWISSCOINCLASSICD_GROUP}" \
+	"${SWISSCOINCLASSICD_DATADIR}"
+
+	checkpath \
+	-d \
+	--mode 0755 \
+	--owner "${SWISSCOINCLASSICD_USER}:${SWISSCOINCLASSICD_GROUP}" \
+	"${SWISSCOINCLASSICD_PIDDIR}"
+
+	checkpath -f \
+	-o ${SWISSCOINCLASSICD_USER}:${SWISSCOINCLASSICD_GROUP} \
+	-m 0660 \
+	${SWISSCOINCLASSICD_CONFIGFILE}
+
+	checkconfig || return 1
+}
+
+checkconfig()
+{
+	if ! grep -qs '^rpcpassword=' "${SWISSCOINCLASSICD_CONFIGFILE}" ; then
+		eerror ""
+		eerror "ERROR: You must set a secure rpcpassword to run swisscoinclassicd."
+		eerror "The setting must appear in ${SWISSCOINCLASSICD_CONFIGFILE}"
+		eerror ""
+		eerror "This password is security critical to securing wallets "
+		eerror "and must not be the same as the rpcuser setting."
+		eerror "You can generate a suitable random password using the following"
+		eerror "command from the shell:"
+		eerror ""
+		eerror "bash -c 'tr -dc a-zA-Z0-9 < /dev/urandom | head -c32 && echo'"
+		eerror ""
+		eerror "It is also recommended that you also set alertnotify so you are "
+		eerror "notified of problems:"
+		eerror ""
+		eerror "ie: alertnotify=echo %%s | mail -s \"SwissCoin Classic Alert\"" \
+			"admin@foo.com"
+		eerror ""
+		return 1
+	fi
+}

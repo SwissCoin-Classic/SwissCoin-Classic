@@ -1,4 +1,4 @@
-// Copyright (c) 2018 The NavCoin Core developers
+// Copyright (c) 2018 The SwissCoin Classic developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -260,7 +260,7 @@ bool CFund::IsValidPaymentRequest(CTransaction tx)
 
     std::string Secret = "I kindly ask to withdraw " + std::to_string(nAmount) + "NAV from the proposal " + proposal.hash.ToString() + ". Payment request id: " + strDZeel;
 
-    CNavCoinAddress addr(proposal.Address);
+    CSwissCoinClassicAddress addr(proposal.Address);
     if (!addr.IsValid())
         return false;
 
@@ -322,7 +322,7 @@ bool CFund::IsValidProposal(CTransaction tx)
     int64_t nDeadline = find_value(metadata, "d").get_int64();
     CAmount nContribution = 0;
 
-    CNavCoinAddress address(Address);
+    CSwissCoinClassicAddress address(Address);
     if (!address.IsValid())
         return false;
 

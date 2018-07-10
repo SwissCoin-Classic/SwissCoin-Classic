@@ -2,15 +2,15 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CHAINPARAMSBASE_H
-#define NAVCOIN_CHAINPARAMSBASE_H
+#ifndef SWISSCOINCLASSIC_CHAINPARAMSBASE_H
+#define SWISSCOINCLASSIC_CHAINPARAMSBASE_H
 
 #include <string>
 #include <vector>
 
 /**
- * CBaseChainParams defines the base parameters (shared between navcoin-cli and navcoind)
- * of a given instance of the NavCoin system.
+ * CBaseChainParams defines the base parameters (shared between swisscoinclassic-cli and swisscoinclassicd)
+ * of a given instance of the SwissCoin Classic system.
  */
 class CBaseChainParams
 {
@@ -60,4 +60,4 @@ std::string ChainNameFromCommandLine();
  */
 bool AreBaseParamsConfigured();
 
-#endif // NAVCOIN_CHAINPARAMSBASE_H
+#endif // SWISSCOINCLASSIC_CHAINPARAMSBASE_H

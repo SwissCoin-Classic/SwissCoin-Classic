@@ -1,11 +1,11 @@
 Sample configuration files for:
 
-SystemD: navcoind.service
-Upstart: navcoind.conf
-OpenRC:  navcoind.openrc
-         navcoind.openrcconf
-CentOS:  navcoind.init
-OS X:    org.navcoin.navcoind.plist
+SystemD: swisscoinclassicd.service
+Upstart: swisscoinclassicd.conf
+OpenRC:  swisscoinclassicd.openrc
+         swisscoinclassicd.openrcconf
+CentOS:  swisscoinclassicd.init
+OS X:    org.swisscoinclassic.swisscoinclassicd.plist
 
 have been made available to assist packagers in creating node packages here.
 

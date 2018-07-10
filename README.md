@@ -6,7 +6,7 @@ For more information please visit the website:
 
 https://swisscoin-classic.org/project-roadmap/
 
-<!-- TODO: [![Build Status](https://travis-ci.org/NAVCoin/navcoin-core.svg?branch=master)](https://travis-ci.org/NAVCoin/navcoin-core) -->
+<!-- TODO: [![Build Status](https://travis-ci.org/NAVCoin/swisscoinclassic-core.svg?branch=master)](https://travis-ci.org/NAVCoin/swisscoinclassic-core) -->
 
 ## Coin Specifications
 
@@ -32,7 +32,7 @@ https://swisscoin-classic.org/project-roadmap/
 
 | Site | link |
 |:-----------|:-----------|
-| Freenode IRC | #navcoin-dev |
+| Freenode IRC | #swisscoinclassic-dev |
 | Medium | https://medium.com/swisscoin-classic |
 | Twitter | https://twitter.com/SwissCoinClassic |
 | Discord | https://discord.gg/METRO:TODO |

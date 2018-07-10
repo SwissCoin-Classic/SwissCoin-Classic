@@ -1,0 +1,33 @@
+# /etc/conf.d/swisscoinclassicd: config file for /etc/init.d/swisscoinclassicd
+
+# Config file location
+#SWISSCOINCLASSICD_CONFIGFILE="/etc/swisscoinclassic/swisscoinclassic.conf"
+
+# What directory to write pidfile to?  (created and owned by $SWISSCOINCLASSICD_USER)
+#SWISSCOINCLASSICD_PIDDIR="/var/run/swisscoinclassicd"
+
+# What filename to give the pidfile
+#SWISSCOINCLASSICD_PIDFILE="${SWISSCOINCLASSICD_PIDDIR}/swisscoinclassicd.pid"
+
+# Where to write swisscoinclassicd data (be mindful that the blockchain is large)
+#SWISSCOINCLASSICD_DATADIR="/var/lib/swisscoinclassicd"
+
+# User and group to own swisscoinclassicd process
+#SWISSCOINCLASSICD_USER="swisscoinclassic"
+#SWISSCOINCLASSICD_GROUP="swisscoinclassic"
+
+# Path to swisscoinclassicd executable
+#SWISSCOINCLASSICD_BIN="/usr/bin/swisscoinclassicd"
+
+# Nice value to run swisscoinclassicd under
+#SWISSCOINCLASSICD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+SWISSCOINCLASSICD_OPTS="-disablewallet"
+
+# The timeout in seconds OpenRC will wait for swisscoinclassicd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+SWISSCOINCLASSICD_SIGTERM_TIMEOUT=60

@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CRYPTO_HMAC_SHA512_H
-#define NAVCOIN_CRYPTO_HMAC_SHA512_H
+#ifndef SWISSCOINCLASSIC_CRYPTO_HMAC_SHA512_H
+#define SWISSCOINCLASSIC_CRYPTO_HMAC_SHA512_H
 
 #include "crypto/sha512.h"
 
@@ -29,4 +29,4 @@ public:
     void Finalize(unsigned char hash[OUTPUT_SIZE]);
 };
 
-#endif // NAVCOIN_CRYPTO_HMAC_SHA512_H
+#endif // SWISSCOINCLASSIC_CRYPTO_HMAC_SHA512_H
