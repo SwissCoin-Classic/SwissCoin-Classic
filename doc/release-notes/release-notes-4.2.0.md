@@ -1,5 +1,5 @@
 
-# SwissCoinClassic v4.2.0 Release Notes
+# SwissCoinClassic v1.0.0 Release Notes
 
 ## Introduces two new Soft Forks:
 

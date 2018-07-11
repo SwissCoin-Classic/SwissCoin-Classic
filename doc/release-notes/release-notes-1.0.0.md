@@ -1,4 +1,4 @@
-# SwissCoinClassic v4.2.1 Release Notes
+# SwissCoinClassic v1.0.0 Release Notes
 
 ### Hot Fix:
 

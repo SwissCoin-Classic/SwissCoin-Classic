@@ -1,4 +1,4 @@
-SwissCoin Classic 4.2.0
+SwissCoin Classic 1.0.0
 =====================
 
 Setup

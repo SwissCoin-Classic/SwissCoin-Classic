@@ -1,4 +1,4 @@
-# SwissCoinClassic 4.0
+# SwissCoinClassic 1.0
 
 ## RELEASE NOTES
 
