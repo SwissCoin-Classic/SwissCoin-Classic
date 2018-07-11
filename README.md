@@ -1,6 +1,6 @@
 ![SwissCoin Classic](./img/logo-extended.png)
 
-This is the working repository for SwissCoin Classic 1.p
+This is the working repository for SwissCoin Classic 1.0.0
 
 For more information please visit the website:
 
