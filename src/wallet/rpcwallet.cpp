@@ -528,7 +528,7 @@ UniValue createproposal(const UniValue& params, bool fHelp)
 
     CSwissCoinClassicAddress destaddress(Address);
     if (!destaddress.IsValid())
-      throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Navcoin address");
+      throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid SwissCoin Classic address");
 
     CAmount nReqAmount = AmountFromValue(params[1]);
     int64_t nDeadline = params[2].get_int64();
@@ -753,7 +753,7 @@ UniValue anonsend(const UniValue& params, bool fHelp)
 
     CSwissCoinClassicAddress address(address_str);
     if (!address.IsValid())
-      throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Navcoin address");
+      throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid SwissCoin Classic address");
 
     UniValue navtechData = navtech.CreateAnonTransaction(params[0].get_str(), nAmount / (nTransactions * 2), nTransactions);
     std::vector<UniValue> serverNavAddresses(find_value(navtechData, "anonaddress").getValues());
@@ -765,7 +765,7 @@ UniValue anonsend(const UniValue& params, bool fHelp)
     {
         CSwissCoinClassicAddress serverNavAddress(serverNavAddresses[i].get_str());
         if (!serverNavAddress.IsValid())
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Navcoin address provided by NAVTech server");
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid SwissCoin Classic address provided by NAVTech server");
     }
 
     // Wallet comments
@@ -859,13 +859,13 @@ UniValue getanondestination(const UniValue& params, bool fHelp)
 
     CSwissCoinClassicAddress address(address_str);
     if (!address.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Navcoin address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid SwissCoin Classic address");
 
     UniValue navtechData = navtech.CreateAnonTransaction(params[0].get_str());
 
     CSwissCoinClassicAddress serverNavAddress(find_value(navtechData, "anonaddress").get_str());
     if (!serverNavAddress.IsValid())
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Navcoin address provided by NAVTech server");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid SwissCoin Classic address provided by NAVTech server");
 
     return navtechData;
 }

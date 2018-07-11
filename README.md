@@ -1,6 +1,6 @@
 ![SwissCoin Classic](./img/logo-extended.png)
 
-This is the working repository for NAV Coin 4.2.0, our fork of bitcoin-core 0.13.
+This is the working repository for SwissCoin Classic 1.p
 
 For more information please visit the website:
 
@@ -19,7 +19,7 @@ https://swisscoin-classic.org/project-roadmap/
 | RPC Port | `44444` |
 
 <!--  What should be done with this? -->
-## Navtech Settings
+<!-- ## Navtech Settings
 
 | Specification | Value |
 |:-----------|:-----------|
@@ -40,7 +40,7 @@ https://swisscoin-classic.org/project-roadmap/
 | Reddit | http://www.reddit.com/r/swisscoinclassic |
 | Facebook | https://www.facebook.com/SwissCoinClassic |
 | Instagram | https://www.instagram.com/swisscoincclassic/ |
-| Bitcointalk | https://bitcointalk.org/index.php?topic=METRO:TODO |
+| Bitcointalk | https://bitcointalk.org/index.php?topic=METRO:TODO | -->
 <!--
 ## Community Resources
 

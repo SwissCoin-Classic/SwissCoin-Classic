@@ -55,7 +55,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Navcoin cannot be compiled without assertions."
+# error "SwissCoin Classic cannot be compiled without assertions."
 #endif
 
 /**
@@ -135,7 +135,7 @@ arith_uint256 bnProofOfStakeLimitV2(~arith_uint256() >> 20);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Navcoin Signed Message:\n";
+const string strMessageMagic = "SwissCoin Classic Signed Message:\n";
 
 
 enum FlushStateMode {

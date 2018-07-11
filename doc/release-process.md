@@ -11,7 +11,7 @@ Release candidates are critical to the SwissCoin Classic release eco-system and 
 
 SwissCoin Classic follows the Semantic Versioning.
 
-e.g `v(MAJOR).(MINOR).(PATCH)` = `v4.2.1`
+e.g `v(MAJOR).(MINOR).(PATCH)` = `v1.0.0`
 
 1. MAJOR version when you make incompatible changes - This applies to hard forks or any type of breaking changes,
 2. MINOR version when you add functionality in a backward-compatible manner - This also applies to any soft forks.
