@@ -186,9 +186,6 @@ public:
         fMineBlocksOnDemand = false;
         fTestnetToBeDeprecatedFieldRPC = false;
 
-        /**
-        * METRO:TODO: These should probably be removed
-        */
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
             ( 0, uint256S("0x49dc4aa21cefbc9b51c07eedc8c669c33b01125a21ebd2bb3f7eb07de8afaf34"))
