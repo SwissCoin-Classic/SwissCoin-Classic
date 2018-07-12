@@ -1870,7 +1870,7 @@
     </message>
     <message>
         <location line="+22"/>
-        <source>87 312.312 123 NAV</source>
+        <source>87 312.312 123 SICC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1880,7 +1880,7 @@
     </message>
     <message>
         <location line="+22"/>
-        <source>1 312.312 NAV</source>
+        <source>1 312.312 SICC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1890,7 +1890,7 @@
     </message>
     <message>
         <location line="+22"/>
-        <source>132 431.41 NAV</source>
+        <source>132 431.41 SICC</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2922,7 +2922,7 @@
     </message>
     <message>
         <location line="-449"/>
-        <source>You don&apos;t have any NAVTech server added. </source>
+        <source>You don&apos;t have any SICCTech server added. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2933,7 +2933,7 @@
     </message>
     <message>
         <location line="+136"/>
-        <source>Manage NAVTech servers</source>
+        <source>Manage SICCTech servers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3018,7 +3018,7 @@
     </message>
     <message>
         <location line="+181"/>
-        <source>NAVTech server returned a different number of addresses.</source>
+        <source>SICCTech server returned a different number of addresses.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3254,7 +3254,7 @@
     </message>
     <message>
         <location line="+14"/>
-        <source>A&amp;mount (NAV):</source>
+        <source>A&amp;mount (SICC):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

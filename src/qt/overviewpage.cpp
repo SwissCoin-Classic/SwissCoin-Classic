@@ -31,7 +31,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     TxViewDelegate(const PlatformStyle *platformStyle):
-        QAbstractItemDelegate(), unit(SwissCoinClassicUnits::NAV),
+        QAbstractItemDelegate(), unit(SwissCoinClassicUnits::SICC),
         platformStyle(platformStyle)
     {
 
