@@ -751,7 +751,7 @@
           <string notr="true"/>
          </property>
          <property name="text">
-          <string>You don't have any NAVTech server added. </string>
+          <string></string>
          </property>
         </widget>
        </item>

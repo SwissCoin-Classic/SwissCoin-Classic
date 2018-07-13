@@ -57,7 +57,7 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *pa
 
     // Coin Control
     connect(ui->pushButtonCoinControl, SIGNAL(clicked()), this, SLOT(coinControlButtonClicked()));
-    connect(ui->noNavtechButton, SIGNAL(clicked()), this, SLOT(showNavTechDialog()));
+    // connect(ui->noNavtechButton, SIGNAL(clicked()), this, SLOT(showNavTechDialog()));
     connect(ui->checkBoxCoinControlChange, SIGNAL(stateChanged(int)), this, SLOT(coinControlChangeChecked(int)));
     connect(ui->lineEditCoinControlChange, SIGNAL(textEdited(const QString &)), this, SLOT(coinControlChangeEdited(const QString &)));
 
@@ -122,7 +122,7 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *pa
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
     ui->anonsendCheckbox->setChecked(settings.value("fAnonSend").toBool());
 
-    checkNavtechServers();
+    // checkNavtechServers();
 }
 
 void SendCoinsDialog::anonsendCheckboxClick()
@@ -460,9 +460,9 @@ void SendCoinsDialog::on_sendButton_clicked()
             }
 
             if(rcp.isanon){
-                questionString.append("<br>" + tr("Navtech server fee:") +QString(" ")+ QString::number(rcp.transaction_fee) + "% "+ tr(rcp.fSubtractFeeFromAmount ? "" : "(already included)") + "<br>");
-                if(rcp.fSubtractFeeFromAmount)
-                    questionString.append("<span style='color:#aa0000;'>" + SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount * ((rcp.transaction_fee/100))) + "</span> " + tr("will be deducted as Navtech fee.") + "<br>");
+                // questionString.append("<br>" + tr("Navtech server fee:") +QString(" ")+ QString::number(rcp.transaction_fee) + "% "+ tr(rcp.fSubtractFeeFromAmount ? "" : "(already included)") + "<br>");
+                // if(rcp.fSubtractFeeFromAmount)
+                //     questionString.append("<span style='color:#aa0000;'>" + SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount * ((rcp.transaction_fee/100))) + "</span> " + tr("will be deducted as Navtech fee.") + "<br>");
 
             }
 
@@ -531,6 +531,7 @@ void SendCoinsDialog::clear()
 
 void SendCoinsDialog::showNavTechDialog()
 {
+    return;
     navtechsetup* setupNavTech = new navtechsetup();
     setupNavTech->setWindowIcon(QIcon(":icons/swisscoinclassic"));
     setupNavTech->setStyleSheet(Skinize());
@@ -752,15 +753,15 @@ void SendCoinsDialog::minimizeFeeSection(bool fMinimize)
     ui->sendButton       ->setVisible(fMinimize);
     ui->label            ->setVisible(fMinimize);
     ui->labelBalance     ->setVisible(fMinimize);
-    ui->noNavtechButton  ->setVisible(fMinimize);
+    // ui->noNavtechButton  ->setVisible(fMinimize);
     //ui->horizontalLayoutSmartFee->setContentsMargins(0, (fMinimize ? 0 : 6), 0, 0);
-
-    if(fMinimize)
-        checkNavtechServers();
-    else
-        ui->noNavtechLabel  ->setVisible(false);
-        ui->anonsendCheckbox->setVisible(false);
-
+    //
+    // if(fMinimize)
+    //     checkNavtechServers();
+    // else
+    //     ui->noNavtechLabel  ->setVisible(false);
+    //     ui->anonsendCheckbox->setVisible(false);
+    //
 
     fFeeMinimized = fMinimize;
 }
