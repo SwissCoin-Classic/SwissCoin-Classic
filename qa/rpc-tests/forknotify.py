@@ -7,10 +7,10 @@
 # Test -alertnotify 
 #
 
-from test_framework.test_framework import NavCoinTestFramework
+from test_framework.test_framework import SwissCoinClassicTestFramework
 from test_framework.util import *
 
-class ForkNotifyTest(NavCoinTestFramework):
+class ForkNotifyTest(SwissCoinClassicTestFramework):
 
     def __init__(self):
         super().__init__()

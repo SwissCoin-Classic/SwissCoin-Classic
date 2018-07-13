@@ -1,4 +1,4 @@
-Source: navcoin
+Source: swisscoinclassic
 Section: utils
 Priority: optional
 Maintainer: Jonas Smedegaard <dr@jones.dk>
@@ -23,45 +23,45 @@ Build-Depends: debhelper,
  libprotobuf-dev, protobuf-compiler,
  python
 Standards-Version: 3.9.2
-Homepage: https://navcoincore.org/
-Vcs-Git: git://github.com/navcoin/navcoin.git
-Vcs-Browser: https://github.com/navcoin/navcoin
+Homepage: https://swisscoinclassiccore.org/
+Vcs-Git: git://github.com/swisscoinclassic/swisscoinclassic.git
+Vcs-Browser: https://github.com/swisscoinclassic/swisscoinclassic
 
-Package: navcoind
+Package: swisscoinclassicd
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - daemon
- NavCoin is an experimental new digital currency that enables instant
- payments to anyone, anywhere in the world. NavCoin uses peer-to-peer
+ SwissCoin Classic is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. SwissCoin Classic uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. NavCoin Core
+ and issuing money are carried out collectively by the network. SwissCoin Classic
  is the name of the open source software which enables the use of this currency.
  .
- This package provides the daemon, navcoind, and the CLI tool
- navcoin-cli to interact with the daemon.
+ This package provides the daemon, swisscoinclassicd, and the CLI tool
+ swisscoinclassic-cli to interact with the daemon.
 
-Package: navcoin-qt
+Package: swisscoinclassic-qt
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer network based digital currency - Qt GUI
- NavCoin is an experimental new digital currency that enables instant
- payments to anyone, anywhere in the world. NavCoin uses peer-to-peer
+ SwissCoin Classic is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. SwissCoin Classic uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. NavCoin Core
+ and issuing money are carried out collectively by the network. SwissCoin Classic
  is the name of the open source software which enables the use of this currency.
  .
- This package provides NavCoin-Qt, a GUI for NavCoin based on Qt.
+ This package provides SwissCoinClassic-Qt, a GUI for SwissCoin Classic based on Qt.
 
-Package: navcoin-tx
+Package: swisscoinclassic-tx
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: peer-to-peer digital currency - standalone transaction tool
- NavCoin is an experimental new digital currency that enables instant
- payments to anyone, anywhere in the world. NavCoin uses peer-to-peer
+ SwissCoin Classic is an experimental new digital currency that enables instant
+ payments to anyone, anywhere in the world. SwissCoin Classic uses peer-to-peer
  technology to operate with no central authority: managing transactions
- and issuing money are carried out collectively by the network. NavCoin Core
+ and issuing money are carried out collectively by the network. SwissCoin Classic
  is the name of the open source software which enables the use of this currency.
  .
- This package provides navcoin-tx, a command-line transaction creation
- tool which can be used without a navcoin daemon.  Some means of
+ This package provides swisscoinclassic-tx, a command-line transaction creation
+ tool which can be used without a swisscoinclassic daemon.  Some means of
  exchanging minimal transaction data with peers is still required.

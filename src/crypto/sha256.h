@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CRYPTO_SHA256_H
-#define NAVCOIN_CRYPTO_SHA256_H
+#ifndef SWISSCOINCLASSIC_CRYPTO_SHA256_H
+#define SWISSCOINCLASSIC_CRYPTO_SHA256_H
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -25,4 +25,4 @@ public:
     CSHA256& Reset();
 };
 
-#endif // NAVCOIN_CRYPTO_SHA256_H
+#endif // SWISSCOINCLASSIC_CRYPTO_SHA256_H

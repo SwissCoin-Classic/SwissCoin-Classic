@@ -1,3 +1,8 @@
 The following files should be taken care of:
 
 doc/swisscoinclassic_logo_doxygen.png
+doc/gitian-building.md
+
+FIXING ISSUES:
+sudo apt-get install libminiupnpc-dev
+sudo apt-get install libzmq3-dev

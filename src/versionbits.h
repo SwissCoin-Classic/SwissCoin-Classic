@@ -2,8 +2,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CONSENSUS_VERSIONBITS
-#define NAVCOIN_CONSENSUS_VERSIONBITS
+#ifndef SWISSCOINCLASSIC_CONSENSUS_VERSIONBITS
+#define SWISSCOINCLASSIC_CONSENSUS_VERSIONBITS
 
 #include "chain.h"
 #include <map>

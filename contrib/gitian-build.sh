@@ -17,7 +17,7 @@ osx=true
 SIGNER=
 VERSION=
 commit=false
-url=https://github.com/navcoindev/navcoin-core
+url=https://github.com/swisscoinclassicdev/swisscoinclassic-core
 proc=2
 mem=2000
 lxc=true
@@ -247,7 +247,7 @@ then
 fi
 
 # Set up build
-pushd ./navcoin-core
+pushd ./swisscoinclassic-core
 git fetch
 git checkout ${COMMIT}
 popd
@@ -256,7 +256,7 @@ popd
 if [[ $build = true ]]
 then
 	# Make output folder
-	mkdir -p ./navcoin-binaries/${VERSION}
+	mkdir -p ./swisscoinclassic-binaries/${VERSION}
 	
 	# Build Dependencies
 	echo ""
@@ -266,7 +266,7 @@ then
 	mkdir -p inputs
 	wget -N -P inputs $osslPatchUrl
 	wget -N -P inputs $osslTarUrl
-	make -C ../navcoin-core/depends download SOURCES_PATH=`pwd`/cache/common
+	make -C ../swisscoinclassic-core/depends download SOURCES_PATH=`pwd`/cache/common
 
 	# Linux
 	if [[ $linux = true ]]
@@ -274,9 +274,9 @@ then
             echo ""
 	    echo "Compiling ${VERSION} Linux"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit navcoin-core=${COMMIT} --url navcoin-core=${url} ../navcoin-core/contrib/gitian-descriptors/gitian-linux.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../navcoin-core/contrib/gitian-descriptors/gitian-linux.yml
-	    mv build/out/navcoin-*.tar.gz build/out/src/navcoin-*.tar.gz ../navcoin-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit swisscoinclassic-core=${COMMIT} --url swisscoinclassic-core=${url} ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-linux.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-linux --destination ../gitian.sigs/ ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-linux.yml
+	    mv build/out/swisscoinclassic-*.tar.gz build/out/src/swisscoinclassic-*.tar.gz ../swisscoinclassic-binaries/${VERSION}
 	fi
 	# Windows
 	if [[ $windows = true ]]
@@ -284,10 +284,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit navcoin-core=${COMMIT} --url navcoin-core=${url} ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml
-	    mv build/out/navcoin-*-win-unsigned.tar.gz inputs/navcoin-win-unsigned.tar.gz
-	    mv build/out/navcoin-*.zip build/out/navcoin-*.exe ../navcoin-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit swisscoinclassic-core=${COMMIT} --url swisscoinclassic-core=${url} ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-win.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-unsigned --destination ../gitian.sigs/ ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-win.yml
+	    mv build/out/swisscoinclassic-*-win-unsigned.tar.gz inputs/swisscoinclassic-win-unsigned.tar.gz
+	    mv build/out/swisscoinclassic-*.zip build/out/swisscoinclassic-*.exe ../swisscoinclassic-binaries/${VERSION}
 	fi
 	# Mac OSX
 	if [[ $osx = true ]]
@@ -295,10 +295,10 @@ then
 	    echo ""
 	    echo "Compiling ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -j ${proc} -m ${mem} --commit navcoin-core=${COMMIT} --url navcoin-core=${url} ../navcoin-core/contrib/gitian-descriptors/gitian-osx.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../navcoin-core/contrib/gitian-descriptors/gitian-osx.yml
-	    mv build/out/navcoin-*-osx-unsigned.tar.gz inputs/navcoin-osx-unsigned.tar.gz
-	    mv build/out/navcoin-*.tar.gz build/out/navcoin-*.dmg ../navcoin-binaries/${VERSION}
+	    ./bin/gbuild -j ${proc} -m ${mem} --commit swisscoinclassic-core=${COMMIT} --url swisscoinclassic-core=${url} ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-unsigned --destination ../gitian.sigs/ ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx.yml
+	    mv build/out/swisscoinclassic-*-osx-unsigned.tar.gz inputs/swisscoinclassic-osx-unsigned.tar.gz
+	    mv build/out/swisscoinclassic-*.tar.gz build/out/swisscoinclassic-*.dmg ../swisscoinclassic-binaries/${VERSION}
 	fi
 	popd
 
@@ -325,27 +325,27 @@ then
 	echo ""
 	echo "Verifying v${VERSION} Linux"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../navcoin-core/contrib/gitian-descriptors/gitian-linux.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-linux ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-linux.yml
 	# Windows
 	echo ""
 	echo "Verifying v${VERSION} Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../navcoin-core/contrib/gitian-descriptors/gitian-win.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-win-unsigned ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-win.yml
 	# Mac OSX	
 	echo ""
 	echo "Verifying v${VERSION} Mac OSX"
 	echo ""	
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../navcoin-core/contrib/gitian-descriptors/gitian-osx.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-unsigned ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx.yml
 	# Signed Windows
 	echo ""
 	echo "Verifying v${VERSION} Signed Windows"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../navcoin-core/contrib/gitian-descriptors/gitian-osx-signer.yml
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx-signer.yml
 	# Signed Mac OSX
 	echo ""
 	echo "Verifying v${VERSION} Signed Mac OSX"
 	echo ""
-	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../navcoin-core/contrib/gitian-descriptors/gitian-osx-signer.yml	
+	./bin/gverify -v -d ../gitian.sigs/ -r ${VERSION}-osx-signed ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx-signer.yml	
 	popd
 fi
 
@@ -360,10 +360,10 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Windows"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../navcoin-core/contrib/gitian-descriptors/gitian-win-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../navcoin-core/contrib/gitian-descriptors/gitian-win-signer.yml
-	    mv build/out/navcoin-*win64-setup.exe ../navcoin-binaries/${VERSION}
-	    mv build/out/navcoin-*win32-setup.exe ../navcoin-binaries/${VERSION}
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-win-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-win-signed --destination ../gitian.sigs/ ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-win-signer.yml
+	    mv build/out/swisscoinclassic-*win64-setup.exe ../swisscoinclassic-binaries/${VERSION}
+	    mv build/out/swisscoinclassic-*win32-setup.exe ../swisscoinclassic-binaries/${VERSION}
 	fi
 	# Sign Mac OSX
 	if [[ $osx = true ]]
@@ -371,9 +371,9 @@ then
 	    echo ""
 	    echo "Signing ${VERSION} Mac OSX"
 	    echo ""
-	    ./bin/gbuild -i --commit signature=${COMMIT} ../navcoin-core/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../navcoin-core/contrib/gitian-descriptors/gitian-osx-signer.yml
-	    mv build/out/navcoin-osx-signed.dmg ../navcoin-binaries/${VERSION}/navcoin-${VERSION}-osx.dmg
+	    ./bin/gbuild -i --commit signature=${COMMIT} ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    ./bin/gsign -p $signProg --signer $SIGNER --release ${VERSION}-osx-signed --destination ../gitian.sigs/ ../swisscoinclassic-core/contrib/gitian-descriptors/gitian-osx-signer.yml
+	    mv build/out/swisscoinclassic-osx-signed.dmg ../swisscoinclassic-binaries/${VERSION}/swisscoinclassic-${VERSION}-osx.dmg
 	fi
 	popd
 

@@ -3,8 +3,8 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CONSENSUS_PARAMS_H
-#define NAVCOIN_CONSENSUS_PARAMS_H
+#ifndef SWISSCOINCLASSIC_CONSENSUS_PARAMS_H
+#define SWISSCOINCLASSIC_CONSENSUS_PARAMS_H
 
 #include "uint256.h"
 #include <map>
@@ -92,4 +92,4 @@ struct Params {
 };
 } // namespace Consensus
 
-#endif // NAVCOIN_CONSENSUS_PARAMS_H
+#endif // SWISSCOINCLASSIC_CONSENSUS_PARAMS_H

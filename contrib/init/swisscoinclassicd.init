@@ -1,0 +1,67 @@
+#!/bin/bash
+#
+#  swisscoinclassicd The swisscoinclassic core server.
+#
+#
+# chkconfig: 345 80 20
+# description: swisscoinclassicd
+# processname: swisscoinclassicd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/swisscoinclassicd, see below
+if [ -f /etc/sysconfig/swisscoinclassicd ]; then
+        . /etc/sysconfig/swisscoinclassicd
+fi
+
+RETVAL=0
+
+prog=swisscoinclassicd
+# you can override the lockfile via SWISSCOINCLASSICD_LOCKFILE in /etc/sysconfig/swisscoinclassicd
+lockfile=${SWISSCOINCLASSICD_LOCKFILE-/var/lock/subsys/swisscoinclassicd}
+
+# swisscoinclassicd defaults to /usr/bin/swisscoinclassicd, override with SWISSCOINCLASSICD_BIN
+swisscoinclassicd=${SWISSCOINCLASSICD_BIN-/usr/bin/swisscoinclassicd}
+
+# swisscoinclassicd opts default to -disablewallet, override with SWISSCOINCLASSICD_OPTS
+swisscoinclassicd_opts=${SWISSCOINCLASSICD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $swisscoinclassicd $swisscoinclassicd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac

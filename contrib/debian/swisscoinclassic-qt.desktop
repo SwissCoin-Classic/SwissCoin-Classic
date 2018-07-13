@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=SwissCoinClassic
+Comment=SwissCoin Classic P2P Cryptocurrency
+Comment[fr]=SwissCoinClassic, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=SwissCoinClassic, eşten eşe kriptografik sanal para birimi
+Exec=swisscoinclassic-qt %u
+Terminal=false
+Type=Application
+Icon=swisscoinclassic128
+MimeType=x-scheme-handler/swisscoinclassic;
+Categories=Office;Finance;

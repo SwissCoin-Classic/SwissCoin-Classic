@@ -1,0 +1,22 @@
+[Unit]
+Description=SwissCoinClassic's distributed currency daemon
+After=network.target
+
+[Service]
+User=swisscoinclassic
+Group=swisscoinclassic
+
+Type=forking
+PIDFile=/var/lib/swisscoinclassicd/swisscoinclassicd.pid
+ExecStart=/usr/bin/swisscoinclassicd -daemon -pid=/var/lib/swisscoinclassicd/swisscoinclassicd.pid \
+-conf=/etc/swisscoinclassic/swisscoinclassic.conf -datadir=/var/lib/swisscoinclassicd -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

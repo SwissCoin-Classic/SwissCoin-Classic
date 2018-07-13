@@ -1,12 +1,12 @@
-![NavCoin](./img/logo-extended.png)
+![SwissCoin Classic](./img/logo-extended.png)
 
-This is the working repository for NAV Coin 4.2.0, our fork of bitcoin-core 0.13.
+This is the working repository for SwissCoin Classic 1.0.0
 
 For more information please visit the website:
 
-https://navcoin.org/project-roadmap/
+https://swisscoin-classic.org/project-roadmap/
 
-[![Build Status](https://travis-ci.org/NAVCoin/navcoin-core.svg?branch=master)](https://travis-ci.org/NAVCoin/navcoin-core)
+<!-- TODO: [![Build Status](https://travis-ci.org/NAVCoin/swisscoinclassic-core.svg?branch=master)](https://travis-ci.org/NAVCoin/swisscoinclassic-core) -->
 
 ## Coin Specifications
 
@@ -18,7 +18,8 @@ https://navcoin.org/project-roadmap/
 | Port | `44440` |
 | RPC Port | `44444` |
 
-## Navtech Settings
+<!--  What should be done with this? -->
+<!-- ## Navtech Settings
 
 | Specification | Value |
 |:-----------|:-----------|
@@ -31,16 +32,16 @@ https://navcoin.org/project-roadmap/
 
 | Site | link |
 |:-----------|:-----------|
-| Freenode IRC | #navcoin-dev |
-| Medium | https://medium.com/nav-coin |
-| Twitter | https://twitter.com/NavCoin |
-| Discord | https://discord.gg/y4Vu9jw |
-| Telegram | https://t.me/navcoin |
-| Reddit | http://www.reddit.com/r/navcoin |
-| Facebook | https://www.facebook.com/NAVCoin |
-| Instagram | https://www.instagram.com/nav.coin.official/ |
-| Bitcointalk | https://bitcointalk.org/index.php?topic=679791 |
-
+| Freenode IRC | #swisscoinclassic-dev |
+| Medium | https://medium.com/swisscoin-classic |
+| Twitter | https://twitter.com/SwissCoinClassic |
+| Discord | https://discord.gg/METRO:TODO |
+| Telegram | https://t.me/swisscoinclassic |
+| Reddit | http://www.reddit.com/r/swisscoinclassic |
+| Facebook | https://www.facebook.com/SwissCoinClassic |
+| Instagram | https://www.instagram.com/swisscoincclassic/ |
+| Bitcointalk | https://bitcointalk.org/index.php?topic=METRO:TODO | -->
+<!--
 ## Community Resources
 
 | Site | link |
@@ -48,7 +49,7 @@ https://navcoin.org/project-roadmap/
 | Trello Board | [https://trello.com/nav-community](https://trello.com/invite/b/rPdvVVL4/ba5c40a885fd3c02cda2a8b406ff7124/nav-community) |
 | Nav Community | http://navcommunity.net |
 
-
+ -->
 
 License
 ---------------------

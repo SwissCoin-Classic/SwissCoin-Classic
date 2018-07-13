@@ -6,7 +6,7 @@
 #include "ui_overviewpage.h"
 #include "skinize.h"
 
-#include "navcoinunits.h"
+#include "swisscoinclassicunits.h"
 #include "clientmodel.h"
 #include "guiconstants.h"
 #include "guiutil.h"
@@ -31,7 +31,7 @@ class TxViewDelegate : public QAbstractItemDelegate
     Q_OBJECT
 public:
     TxViewDelegate(const PlatformStyle *platformStyle):
-        QAbstractItemDelegate(), unit(NavCoinUnits::NAV),
+        QAbstractItemDelegate(), unit(SwissCoinClassicUnits::SICC),
         platformStyle(platformStyle)
     {
 
@@ -85,7 +85,7 @@ public:
             foreground = COLOR_POSITIVE;
         }
         painter->setPen(foreground);
-        QString amountText = NavCoinUnits::formatWithUnit(unit, amount, true, NavCoinUnits::separatorAlways);
+        QString amountText = SwissCoinClassicUnits::formatWithUnit(unit, amount, true, SwissCoinClassicUnits::separatorAlways);
         if(!confirmed)
         {
             amountText = QString("[") + amountText + QString("]");
@@ -183,11 +183,11 @@ void OverviewPage::setBalance(const CAmount& balance, const CAmount& unconfirmed
     currentWatchOnlyBalance = watchOnlyBalance;
     currentWatchUnconfBalance = watchUnconfBalance;
     currentWatchImmatureBalance = watchImmatureBalance;
-    ui->labelBalance->setText(NavCoinUnits::formatWithUnit(unit, balance, false, NavCoinUnits::separatorAlways));
-    ui->labelUnconfirmed->setText(NavCoinUnits::formatWithUnit(unit, unconfirmedBalance, false, NavCoinUnits::separatorAlways));
-    ui->labelStaking->setText(NavCoinUnits::formatWithUnit(unit, stakingBalance, false, NavCoinUnits::separatorAlways));
-    ui->labelImmature->setText(NavCoinUnits::formatWithUnit(unit, immatureBalance, false, NavCoinUnits::separatorAlways));
-    ui->labelTotal->setText(NavCoinUnits::formatWithUnit(unit, balance + unconfirmedBalance + stakingBalance, false, NavCoinUnits::separatorAlways));
+    ui->labelBalance->setText(SwissCoinClassicUnits::formatWithUnit(unit, balance, false, SwissCoinClassicUnits::separatorAlways));
+    ui->labelUnconfirmed->setText(SwissCoinClassicUnits::formatWithUnit(unit, unconfirmedBalance, false, SwissCoinClassicUnits::separatorAlways));
+    ui->labelStaking->setText(SwissCoinClassicUnits::formatWithUnit(unit, stakingBalance, false, SwissCoinClassicUnits::separatorAlways));
+    ui->labelImmature->setText(SwissCoinClassicUnits::formatWithUnit(unit, immatureBalance, false, SwissCoinClassicUnits::separatorAlways));
+    ui->labelTotal->setText(SwissCoinClassicUnits::formatWithUnit(unit, balance + unconfirmedBalance + stakingBalance, false, SwissCoinClassicUnits::separatorAlways));
 
     bool showStaking = stakingBalance != 0;
 
@@ -377,9 +377,9 @@ void OverviewPage::updateStakeReport(bool fImmediate=false)
 
     int unit = walletModel->getOptionsModel()->getDisplayUnit();
 
-    ui->label24hStakingStats->setText(NavCoinUnits::formatWithUnit(unit, aRange[i++].Total, false, NavCoinUnits::separatorAlways));
-    ui->label7dStakingStats->setText(NavCoinUnits::formatWithUnit(unit, aRange[i++].Total, false, NavCoinUnits::separatorAlways));
-    ui->label30dStakingStats->setText(NavCoinUnits::formatWithUnit(unit, aRange[i++].Total, false, NavCoinUnits::separatorAlways));
+    ui->label24hStakingStats->setText(SwissCoinClassicUnits::formatWithUnit(unit, aRange[i++].Total, false, SwissCoinClassicUnits::separatorAlways));
+    ui->label7dStakingStats->setText(SwissCoinClassicUnits::formatWithUnit(unit, aRange[i++].Total, false, SwissCoinClassicUnits::separatorAlways));
+    ui->label30dStakingStats->setText(SwissCoinClassicUnits::formatWithUnit(unit, aRange[i++].Total, false, SwissCoinClassicUnits::separatorAlways));
 
 }
 

@@ -1,14 +1,14 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2018 The NavCoin Core developers
+// Copyright (c) 2018 The SwissCoin Classic developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_MAIN_H
-#define NAVCOIN_MAIN_H
+#ifndef SWISSCOINCLASSIC_MAIN_H
+#define SWISSCOINCLASSIC_MAIN_H
 
 #if defined(HAVE_CONFIG_H)
-#include "config/navcoin-config.h"
+#include "config/swisscoinclassic-config.h"
 #endif
 
 #include "amount.h"
@@ -626,4 +626,4 @@ bool CountVotes(CValidationState& state, CBlockIndex *pindexNew, const CBlock* p
 
 bool IsSigHFEnabled(const Consensus::Params &consensus, const CBlockIndex *pindexPrev);
 
-#endif // NAVCOIN_MAIN_H
+#endif // SWISSCOINCLASSIC_MAIN_H

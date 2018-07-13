@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
-// Copyright (c) 2017-2018 The NavCoin Core developers
+// Copyright (c) 2017-2018 The SwissCoin Classic developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -55,7 +55,7 @@
 using namespace std;
 
 #if defined(NDEBUG)
-# error "Navcoin cannot be compiled without assertions."
+# error "SwissCoin Classic cannot be compiled without assertions."
 #endif
 
 /**
@@ -135,7 +135,7 @@ arith_uint256 bnProofOfStakeLimitV2(~arith_uint256() >> 20);
 /** Constant stuff for coinbase transactions we create: */
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "Navcoin Signed Message:\n";
+const string strMessageMagic = "SwissCoin Classic Signed Message:\n";
 
 
 enum FlushStateMode {
@@ -1802,10 +1802,10 @@ bool ReadBlockFromDisk(CBlock& block, const CBlockIndex* pindex, const Consensus
 
 CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
 {
-
+    
     if (nHeight == 1)
     {
-        CAmount nSubsidy = 59800000 * COIN;
+        CAmount nSubsidy = 5000000000 * COIN;
         return nSubsidy;
     }
 
@@ -2466,7 +2466,7 @@ bool FindUndoPos(CValidationState &state, int nFile, CDiskBlockPos &pos, unsigne
 static CCheckQueue<CScriptCheck> scriptcheckqueue(128);
 
 void ThreadScriptCheck() {
-    RenameThread("navcoin-scriptch");
+    RenameThread("swisscoinclassic-scriptch");
     scriptcheckqueue.Thread();
 }
 
@@ -3287,7 +3287,7 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
         int nUpgraded = 0;
         const CBlockIndex* pindex = chainActive.Tip();
 //
-// Commented - NavCoin uses now version control
+// Commented - SwissCoin Classic uses now version control
 //
 //        for (int bit = 0; bit < VERSIONBITS_NUM_BITS; bit++) {
 //            WarningBitsConditionChecker checker(bit);
@@ -3316,16 +3316,16 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
         }
         if (nUpgraded > 0)
             warningMessages.push_back(strprintf("%d of last 1000 blocks use a new version of the wallet", nUpgraded));
-        if (nUpgraded > 1000/2.5)
-        {
-            // strMiscWarning is read by GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
-            strMiscWarning = _("A new version of the wallet has been released. Please update as soon as possible.");
-            warningMessages.push_back("A new version of the wallet has been released. Please update as soon as possible.");
-            if (!fWarned) {
-                AlertNotify(strMiscWarning);
-                fWarned = true;
-            }
-        }
+        // if (nUpgraded > 1000/2.5)
+        // {
+        //     // strMiscWarning is read by GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
+        //     strMiscWarning = _("A new version of the wallet has been released. Please update as soon as possible.");
+        //     warningMessages.push_back("A new version of the wallet has been released. Please update as soon as possible.");
+        //     if (!fWarned) {
+        //         AlertNotify(strMiscWarning);
+        //         fWarned = true;
+        //     }
+        // }
     }
     hashBestChain = chainActive.Tip()->GetBlockHash();
 
@@ -4542,7 +4542,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
                         continue;
                     if(!(pindexPrev->nHeight - pblockindex->nHeight > Params().GetConsensus().nCommunityFundMinAge))
                         return state.DoS(100, error("CheckBlock() : payment request not mature enough."));
-                    if(block.vtx[0].vout[i].nValue != prequest.nAmount || prequest.fState != CFund::ACCEPTED || proposal.Address != CNavCoinAddress(address).ToString())
+                    if(block.vtx[0].vout[i].nValue != prequest.nAmount || prequest.fState != CFund::ACCEPTED || proposal.Address != CSwissCoinClassicAddress(address).ToString())
                         return state.DoS(100, error("CheckBlock() : coinbase output does not match an accepted payment request"));
                     else {
                         prequest.paymenthash = block.GetHash();
@@ -5918,19 +5918,19 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
 
         if(pfrom->nVersion < 70015)
         {
-            reason = "You are using an old version of NavCoin, please update.";
+            reason = "You are using an old version of SwissCoinClassic, please update.";
             fObsolete = true;
         }
 
         if(pfrom->nVersion < 70017 && IsWitnessEnabled(chainActive.Tip(), Params().GetConsensus()))
         {
-            reason = "Segregated Witness has been enabled and you are using an old version of NavCoin, please update.";
+            reason = "Segregated Witness has been enabled and you are using an old version of SwissCoinClassic, please update.";
             fObsolete = true;
         }
 
         if(pfrom->nVersion < 70020 && IsCommunityFundEnabled(chainActive.Tip(), Params().GetConsensus()))
         {
-            reason = "Community Fund has been enabled and you are using an old version of NavCoin, please update.";
+            reason = "Community Fund has been enabled and you are using an old version of SwissCoinClassic, please update.";
             fObsolete = true;
         }
 

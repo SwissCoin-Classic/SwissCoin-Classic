@@ -6,7 +6,7 @@ NAVCoin
 Navtech
 navcoin-dev
 navcoin
-NavCoin
+SwissCoinClassic
 navcommunity
 nav
 NAV
@@ -19,15 +19,23 @@ SwissCoinClassic
 swisscoinclassic-dev
 SIC
 
-3. DEFIED CHANGES
-NavCoin Core => SwissCoin Classic
+3. DEFINED CHANGES
+SwissCoin Classic => SwissCoin Classic
+SWISSCOINCLASSIC => SWISSCOINCLASSIC
+Nav Coin => SwissCoin Classic
+
+4. Problems
+how do we ensure that navcoin-core does not get turned into navcoinclassic-core, which would be problematic because of the long name
 
 Step A: Rename all navcoin to swisscoinclassic
 ```
 # in the doc folder:
+# RUN IN ORDER!
 
-$ grep -lr navcoin | xargs sed -i 's/navcoin/swisscoinclasic/g'
-$ grep -lr NavCoin | xargs sed -i 's/NavCoin/SwissCoinClassic/g'
+grep -lr navcoin | xargs sed -i 's/navcoin/swisscoinclasic/g'
+grep -lr SwissCoin Classic | xargs sed -i 's/SwissCoin Classic/SwissCoin Classic/g'
+grep -lr SwissCoin Classic | xargs sed -i 's/SwissCoinClassic/SwissCoin/g'
+
 ```
 Step B: Rename all navcoin files to swisscoinclassic
 

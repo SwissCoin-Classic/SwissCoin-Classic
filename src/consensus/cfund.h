@@ -1,9 +1,9 @@
-// Copyright (c) 2018 The NavCoin Core developers
+// Copyright (c) 2018 The SwissCoin Classic developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef NAVCOIN_CFUND_H
-#define NAVCOIN_CFUND_H
+#ifndef SWISSCOINCLASSIC_CFUND_H
+#define SWISSCOINCLASSIC_CFUND_H
 
 #include "amount.h"
 #include "script/script.h"
@@ -258,4 +258,4 @@ public:
 
 }
 
-#endif // NAVCOIN_CFUND_H
+#endif // SWISSCOINCLASSIC_CFUND_H

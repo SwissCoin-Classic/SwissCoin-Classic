@@ -6,7 +6,7 @@
 #include "ui_sendcoinsdialog.h"
 
 #include "addresstablemodel.h"
-#include "navcoinunits.h"
+#include "swisscoinclassicunits.h"
 #include "clientmodel.h"
 #include "coincontroldialog.h"
 #include "guiutil.h"
@@ -57,7 +57,7 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *pa
 
     // Coin Control
     connect(ui->pushButtonCoinControl, SIGNAL(clicked()), this, SLOT(coinControlButtonClicked()));
-    connect(ui->noNavtechButton, SIGNAL(clicked()), this, SLOT(showNavTechDialog()));
+    // connect(ui->noNavtechButton, SIGNAL(clicked()), this, SLOT(showNavTechDialog()));
     connect(ui->checkBoxCoinControlChange, SIGNAL(stateChanged(int)), this, SLOT(coinControlChangeChecked(int)));
     connect(ui->lineEditCoinControlChange, SIGNAL(textEdited(const QString &)), this, SLOT(coinControlChangeEdited(const QString &)));
 
@@ -122,7 +122,7 @@ SendCoinsDialog::SendCoinsDialog(const PlatformStyle *platformStyle, QWidget *pa
     minimizeFeeSection(settings.value("fFeeSectionMinimized").toBool());
     ui->anonsendCheckbox->setChecked(settings.value("fAnonSend").toBool());
 
-    checkNavtechServers();
+    // checkNavtechServers();
 }
 
 void SendCoinsDialog::anonsendCheckboxClick()
@@ -256,7 +256,7 @@ void SendCoinsDialog::on_sendButton_clicked()
 
                     for(unsigned int i = 0; i < serverNavAddresses.size(); i++)
                     {
-                        CNavCoinAddress serverNavAddress(serverNavAddresses[i].get_str());
+                        CSwissCoinClassicAddress serverNavAddress(serverNavAddresses[i].get_str());
                         if (!serverNavAddress.IsValid())
                         {
 
@@ -380,7 +380,7 @@ void SendCoinsDialog::on_sendButton_clicked()
 
     // process prepareStatus and on error generate message shown to user
     processSendCoinsReturn(prepareStatus,
-        NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee()));
+        SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), currentTransaction.getTransactionFee()));
 
     if(prepareStatus.status != WalletModel::OK) {
         fNewRecipientAllowed = true;
@@ -405,7 +405,7 @@ void SendCoinsDialog::on_sendButton_clicked()
     const SendCoinsRecipient &rcp = currentTransaction.recipients.first();
     {
         // generate bold amount string
-        QString amount = "<b>" + NavCoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount);
+        QString amount = "<b>" + SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount);
         amount.append("</b>");
         // generate monospace address string
         QString address = "<span style='font-family: monospace;'>" + rcp.address;
@@ -445,7 +445,7 @@ void SendCoinsDialog::on_sendButton_clicked()
         {
             // append fee string if a fee is required
             questionString.append("<hr /><span style='color:#aa0000;'>");
-            questionString.append(NavCoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), txFee + anonfee));
+            questionString.append(SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), txFee + anonfee));
             questionString.append("</span> ");
             questionString.append(tr("added as transaction fee"));
 
@@ -456,13 +456,13 @@ void SendCoinsDialog::on_sendButton_clicked()
             if(rcp.fSubtractFeeFromAmount && anonfee > 0)
             {
                 questionString.append("<br>" + tr("The following fee will be deducted") + ":");
-                questionString.append(NavCoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), anonfee));
+                questionString.append(SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), anonfee));
             }
 
             if(rcp.isanon){
-                questionString.append("<br>" + tr("Navtech server fee:") +QString(" ")+ QString::number(rcp.transaction_fee) + "% "+ tr(rcp.fSubtractFeeFromAmount ? "" : "(already included)") + "<br>");
-                if(rcp.fSubtractFeeFromAmount)
-                    questionString.append("<span style='color:#aa0000;'>" + NavCoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount * ((rcp.transaction_fee/100))) + "</span> " + tr("will be deducted as Navtech fee.") + "<br>");
+                // questionString.append("<br>" + tr("Navtech server fee:") +QString(" ")+ QString::number(rcp.transaction_fee) + "% "+ tr(rcp.fSubtractFeeFromAmount ? "" : "(already included)") + "<br>");
+                // if(rcp.fSubtractFeeFromAmount)
+                //     questionString.append("<span style='color:#aa0000;'>" + SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), nTotalAmount * ((rcp.transaction_fee/100))) + "</span> " + tr("will be deducted as Navtech fee.") + "<br>");
 
             }
 
@@ -476,13 +476,13 @@ void SendCoinsDialog::on_sendButton_clicked()
     questionString.append("<hr />");
     CAmount totalAmount = currentTransaction.getTotalTransactionAmount() + txFee + anonfee;
     QStringList alternativeUnits;
-    Q_FOREACH(NavCoinUnits::Unit u, NavCoinUnits::availableUnits())
+    Q_FOREACH(SwissCoinClassicUnits::Unit u, SwissCoinClassicUnits::availableUnits())
     {
         if(u != model->getOptionsModel()->getDisplayUnit())
-            alternativeUnits.append(NavCoinUnits::formatHtmlWithUnit(u, totalAmount));
+            alternativeUnits.append(SwissCoinClassicUnits::formatHtmlWithUnit(u, totalAmount));
     }
     questionString.append(tr("Total Amount %1")
-        .arg(NavCoinUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount)));
+        .arg(SwissCoinClassicUnits::formatHtmlWithUnit(model->getOptionsModel()->getDisplayUnit(), totalAmount)));
     questionString.append(QString("<span style='font-size:10pt;font-weight:normal;'><br />(=%2)</span>")
         .arg(alternativeUnits.join(" " + tr("or") + "<br />")));
 
@@ -531,8 +531,9 @@ void SendCoinsDialog::clear()
 
 void SendCoinsDialog::showNavTechDialog()
 {
+    return;
     navtechsetup* setupNavTech = new navtechsetup();
-    setupNavTech->setWindowIcon(QIcon(":icons/navcoin"));
+    setupNavTech->setWindowIcon(QIcon(":icons/swisscoinclassic"));
     setupNavTech->setStyleSheet(Skinize());
 
     setupNavTech->exec();
@@ -669,7 +670,7 @@ void SendCoinsDialog::setBalance(const CAmount& balance, const CAmount& unconfir
 
     if(model && model->getOptionsModel())
     {
-        ui->labelBalance->setText(NavCoinUnits::formatWithUnit(0, balance) + (model->getOptionsModel()->getDisplayUnit() != 0 ?( " (" + NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance) + ")") : ""));
+        ui->labelBalance->setText(SwissCoinClassicUnits::formatWithUnit(0, balance) + (model->getOptionsModel()->getDisplayUnit() != 0 ?( " (" + SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), balance) + ")") : ""));
     }
 }
 
@@ -728,7 +729,7 @@ void SendCoinsDialog::processSendCoinsReturn(const WalletModel::SendCoinsReturn 
         msgParams.second = CClientUIInterface::MSG_ERROR;
         break;
     case WalletModel::AbsurdFee:
-        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
+        msgParams.first = tr("A fee higher than %1 is considered an absurdly high fee.").arg(SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), maxTxFee));
         break;
     case WalletModel::PaymentRequestExpired:
         msgParams.first = tr("Payment request expired.");
@@ -752,15 +753,15 @@ void SendCoinsDialog::minimizeFeeSection(bool fMinimize)
     ui->sendButton       ->setVisible(fMinimize);
     ui->label            ->setVisible(fMinimize);
     ui->labelBalance     ->setVisible(fMinimize);
-    ui->noNavtechButton  ->setVisible(fMinimize);
+    // ui->noNavtechButton  ->setVisible(fMinimize);
     //ui->horizontalLayoutSmartFee->setContentsMargins(0, (fMinimize ? 0 : 6), 0, 0);
-
-    if(fMinimize)
-        checkNavtechServers();
-    else
-        ui->noNavtechLabel  ->setVisible(false);
-        ui->anonsendCheckbox->setVisible(false);
-
+    //
+    // if(fMinimize)
+    //     checkNavtechServers();
+    // else
+    //     ui->noNavtechLabel  ->setVisible(false);
+    //     ui->anonsendCheckbox->setVisible(false);
+    //
 
     fFeeMinimized = fMinimize;
 }
@@ -813,7 +814,7 @@ void SendCoinsDialog::updateFeeMinimizedLabel()
   //  if (ui->radioSmartFee->isChecked())
   //      ui->labelFeeMinimized->setText(ui->labelSmartFee->text());
   //  else {
-  //      ui->labelFeeMinimized->setText(NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) +
+  //      ui->labelFeeMinimized->setText(SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), ui->customFee->value()) +
   //          ((ui->radioCustomPerKilobyte->isChecked()) ? "/kB" : ""));
   //  }
 }
@@ -822,7 +823,7 @@ void SendCoinsDialog::updateMinFeeLabel()
 {
     if (model && model->getOptionsModel())
         ui->checkBoxMinimumFee->setText(tr("Pay only the required fee of %1").arg(
-            NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), CWallet::GetRequiredFee(1000)) + "/kB")
+            SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(), CWallet::GetRequiredFee(1000)) + "/kB")
         );
 }
 
@@ -836,14 +837,14 @@ void SendCoinsDialog::updateSmartFeeLabel()
     CFeeRate feeRate = mempool.estimateSmartFee(nBlocksToConfirm, &estimateFoundAtBlocks);
     if (feeRate <= CFeeRate(0)) // not enough data => minfee
     {
-        ui->labelSmartFee->setText(NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(),
+        ui->labelSmartFee->setText(SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(),
                                                                 std::max(CWallet::fallbackFee.GetFeePerK(), CWallet::GetRequiredFee(1000))) + "/kB");
         ui->labelSmartFee2->show(); // (Smart fee not initialized yet. This usually takes a few blocks...)
         ui->labelFeeEstimation->setText("");
     }
     else
     {
-        ui->labelSmartFee->setText(NavCoinUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(),
+        ui->labelSmartFee->setText(SwissCoinClassicUnits::formatWithUnit(model->getOptionsModel()->getDisplayUnit(),
                                                                 std::max(feeRate.GetFeePerK(), CWallet::GetRequiredFee(1000))) + "/kB");
         ui->labelSmartFee2->hide();
         ui->labelFeeEstimation->setText(tr("Estimated to begin confirmation within %n block(s).", "", estimateFoundAtBlocks));
@@ -944,7 +945,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         CoinControlDialog::coinControl->destChange = CNoDestination();
         ui->labelCoinControlChangeLabel->setStyleSheet("QLabel{color:red;}");
 
-        CNavCoinAddress addr = CNavCoinAddress(text.toStdString());
+        CSwissCoinClassicAddress addr = CSwissCoinClassicAddress(text.toStdString());
 
         if (text.isEmpty()) // Nothing entered
         {
@@ -952,7 +953,7 @@ void SendCoinsDialog::coinControlChangeEdited(const QString& text)
         }
         else if (!addr.IsValid()) // Invalid address
         {
-            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid NavCoin address"));
+            ui->labelCoinControlChangeLabel->setText(tr("Warning: Invalid SwissCoin Classic address"));
         }
         else // Valid address
         {

@@ -1,0 +1,8 @@
+/usr/bin/swisscoinclassic-cli		--	gen_context(system_u:object_r:swisscoinclassic_exec_t,s0)
+/usr/sbin/swisscoinclassicd		--	gen_context(system_u:object_r:swisscoinclassic_exec_t,s0)
+/usr/lib(64)?/swisscoinclassic/swisscoinclassicd		--	gen_context(system_u:object_r:swisscoinclassic_exec_t,s0)
+
+/etc/swisscoinclassic(/.*)?		gen_context(system_u:object_r:swisscoinclassic_conf_t,s0)
+/var/lib/swisscoinclassic(/.*)?		gen_context(system_u:object_r:swisscoinclassic_var_lib_t,s0)
+
+(/var)?/run/swisscoinclassicd(/.*)?   gen_context(system_u:object_r:swisscoinclassic_var_run_t,s0)
