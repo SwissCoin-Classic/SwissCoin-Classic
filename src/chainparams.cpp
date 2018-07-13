@@ -176,7 +176,6 @@ public:
 
         // vSeeds.push_back(CDNSSeedData("nav.community", "seed.nav.community"));
         // vSeeds.push_back(CDNSSeedData("swisscoinclassic.org", "seed.swisscoinclassic.org"));
-        vSeeds.push_back(CDNSSeedData("metrodev.io", "siccseed.metrodev.io"));
         
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 

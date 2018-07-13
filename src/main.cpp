@@ -3316,16 +3316,16 @@ void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
         }
         if (nUpgraded > 0)
             warningMessages.push_back(strprintf("%d of last 1000 blocks use a new version of the wallet", nUpgraded));
-        if (nUpgraded > 1000/2.5)
-        {
-            // strMiscWarning is read by GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
-            strMiscWarning = _("A new version of the wallet has been released. Please update as soon as possible.");
-            warningMessages.push_back("A new version of the wallet has been released. Please update as soon as possible.");
-            if (!fWarned) {
-                AlertNotify(strMiscWarning);
-                fWarned = true;
-            }
-        }
+        // if (nUpgraded > 1000/2.5)
+        // {
+        //     // strMiscWarning is read by GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
+        //     strMiscWarning = _("A new version of the wallet has been released. Please update as soon as possible.");
+        //     warningMessages.push_back("A new version of the wallet has been released. Please update as soon as possible.");
+        //     if (!fWarned) {
+        //         AlertNotify(strMiscWarning);
+        //         fWarned = true;
+        //     }
+        // }
     }
     hashBestChain = chainActive.Tip()->GetBlockHash();
 
